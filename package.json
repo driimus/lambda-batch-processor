@@ -1,0 +1,28 @@
+{
+  "name": "sqs-batch-processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "aws lambda",
+    "batch processor",
+    "sqs"
+  ],
+  "author": {
+    "name": "Cristian Petre",
+    "email": "driimus@vivaldi.net"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@aws-sdk/client-sqs": "^3.190.0",
+    "@types/aws-lambda": "^8.10.107",
+    "@types/node": "^16.18.0",
+    "typescript": "^4.8.4"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-sqs": "^3.190.0"
+  }
+}
