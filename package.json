@@ -1,0 +1,22 @@
+{
+  "name": "sqs-batch-processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@aws-sdk/client-sqs": "^3.190.0",
+    "@types/aws-lambda": "^8.10.107",
+    "@types/node": "^16",
+    "node^16": "link:@types/node^16",
+    "typescript": "^4.8.4"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-sqs": "^3.190.0"
+  }
+}
