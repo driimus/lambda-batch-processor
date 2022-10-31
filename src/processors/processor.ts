@@ -1,19 +1,17 @@
 import {
   Context,
-  DynamoDBRecord,
   DynamoDBStreamEvent,
   KinesisStreamEvent,
-  KinesisStreamRecord,
   SQSBatchItemFailure,
   SQSBatchResponse,
   SQSEvent,
-  SQSRecord,
 } from 'aws-lambda';
 import {
   DefaultPermanentFailureHandler,
   PermanentFailure,
   PermanentFailureHandler,
-} from './PermanentFailureHandler';
+} from '../nonRetryableErrorHandlers';
+import { EntryType } from '../types';
 
 type Config<TEvent extends ProcessableEvent> = {
   /**
@@ -25,21 +23,13 @@ type Config<TEvent extends ProcessableEvent> = {
   /**
    * @see DefaultPermanentFailureHandler for default behaviour
    */
-  nonRetryableErrorHandler?: PermanentFailureHandler;
+  nonRetryableErrorHandler?: PermanentFailureHandler<TEvent>;
 };
-
-// enum EventType {
-//   SQS = 'SQS',
-//   Kinesis = 'Kinesis',
-//   DynamoDB = 'DynamoDB',
-// }
 
 export type RecordProcessor<TEvent extends ProcessableEvent = ProcessableEvent> = (
   record: EntryType<TEvent['Records']>,
   context: Context
 ) => Promise<void>;
-
-export type EntryType<T> = T extends Array<infer U> ? U : never;
 
 export type ProcessableEvent = SQSEvent | DynamoDBStreamEvent | KinesisStreamEvent;
 export type ProcessableRecord<TEvent extends ProcessableEvent = ProcessableEvent> = EntryType<
@@ -102,23 +92,4 @@ export abstract class BatchProcessor<TEvent extends ProcessableEvent> {
   }
 
   protected abstract getFailureIdentifier(record: ProcessableRecord): string;
-}
-
-export class SQSBatchProcessor extends BatchProcessor<SQSEvent> {
-  protected getFailureIdentifier(record: SQSRecord): string {
-    return record.messageId;
-  }
-}
-
-export class KinesisBatchProcessor extends BatchProcessor<KinesisStreamEvent> {
-  protected getFailureIdentifier(record: KinesisStreamRecord): string {
-    return record.kinesis.sequenceNumber;
-  }
-}
-
-export class DynamoDBBatchProcessor extends BatchProcessor<DynamoDBStreamEvent> {
-  protected getFailureIdentifier(record: DynamoDBRecord): string {
-    // TODO: why is the identifier optional for these?
-    return record.dynamodb?.SequenceNumber ?? '';
-  }
 }

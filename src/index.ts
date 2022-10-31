@@ -1,2 +1,2 @@
 export * from './errors';
-export * from './processor';
+export * from './processors/processor';

@@ -4,9 +4,10 @@ import {
   SendMessageCommandInput,
   SQSClient,
 } from '@aws-sdk/client-sqs';
-import { Context, SQSRecord } from 'aws-lambda';
-import { PermanentFailure, PermanentFailureHandler } from './PermanentFailureHandler';
+import { Context, SQSEvent, SQSRecord } from 'aws-lambda';
+import { PermanentFailure, PermanentFailureHandler } from './nonRetryableErrorHandlers';
 
+// TODO: separate package for this
 /**
  * @example
  * ```ts
@@ -15,10 +16,10 @@ import { PermanentFailure, PermanentFailureHandler } from './PermanentFailureHan
  * })
  * ```
  */
-export class PermanentFailureDLQHandler implements PermanentFailureHandler {
+export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEvent> {
   constructor(public readonly queueUrl: string, protected client = new SQSClient({})) {}
 
-  async handleRejections(failures: PermanentFailure[], context: Context): Promise<void> {
+  async handleRejections(failures: PermanentFailure<SQSRecord>[], context: Context): Promise<void> {
     const Entries: SendMessageBatchRequestEntry[] = failures.map(({ record }) => {
       return {
         Id: record.messageId,
