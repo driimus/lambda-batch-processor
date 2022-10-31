@@ -7,6 +7,14 @@ import {
 import { Context, SQSRecord } from 'aws-lambda';
 import { PermanentFailure, PermanentFailureHandler } from './PermanentFailureHandler';
 
+/**
+ * @example
+ * ```ts
+ * const processor = new BatchSQSProcessor({
+ *
+ * })
+ * ```
+ */
 export class PermanentFailureDLQHandler implements PermanentFailureHandler {
   constructor(public readonly queueUrl: string, protected client = new SQSClient({})) {}
 
@@ -19,6 +27,7 @@ export class PermanentFailureDLQHandler implements PermanentFailureHandler {
       };
     });
 
+    // TODO: batch request needs to be split into chunks of 10
     await this.client.send(new SendMessageBatchCommand({ QueueUrl: this.queueUrl, Entries }));
   }
 
