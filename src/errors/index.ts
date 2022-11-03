@@ -1,1 +1,1 @@
-export * from "./SQSBatchProcessingError";
+export * from './BatchProcessingError';

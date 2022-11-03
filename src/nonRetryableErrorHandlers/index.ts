@@ -1,12 +1,12 @@
 import { Context } from 'aws-lambda';
-import { ProcessableEvent, ProcessableRecord } from '../processors/processor';
+import { BatchEvent, ProcessableRecord } from '../processors/processor';
 
 export type PermanentFailure<T extends ProcessableRecord = ProcessableRecord> = {
   record: T;
   reason: unknown;
 };
 
-export interface PermanentFailureHandler<T extends ProcessableEvent = ProcessableEvent> {
+export interface PermanentFailureHandler<T extends BatchEvent = BatchEvent> {
   handleRejections: (
     failures: PermanentFailure<ProcessableRecord<T>>[],
     context: Context
@@ -18,6 +18,6 @@ export interface PermanentFailureHandler<T extends ProcessableEvent = Processabl
  *
  * TODO: does it need logging?
  */
-export class DefaultPermanentFailureHandler implements PermanentFailureHandler<ProcessableEvent> {
+export class DefaultPermanentFailureHandler implements PermanentFailureHandler<BatchEvent> {
   async handleRejections(failures: PermanentFailure[], context: Context): Promise<void> {}
 }

@@ -3,9 +3,15 @@ import {
   DynamoDBStreamEvent,
   KinesisStreamEvent,
   SQSBatchItemFailure,
+  KinesisStreamBatchResponse,
+  DynamoDBBatchResponse,
   SQSBatchResponse,
   SQSEvent,
+  SQSHandler,
+  DynamoDBStreamHandler,
+  KinesisStreamHandler,
 } from 'aws-lambda';
+import { BatchProcessingError } from '../errors';
 import {
   DefaultPermanentFailureHandler,
   PermanentFailure,
@@ -13,11 +19,22 @@ import {
 } from '../nonRetryableErrorHandlers';
 import { EntryType } from '../types';
 
-type Config<TEvent extends ProcessableEvent> = {
+interface LogFn {
+  (obj: object | unknown, msg?: string): void;
+  (msg: string): void;
+}
+
+interface Logger {
+  info: LogFn;
+  error: LogFn;
+}
+
+type Config<TEvent extends BatchEvent> = {
   /**
    * Handler for processing each batch entry
    */
   handler: RecordProcessor<TEvent>;
+  logger?: Logger;
   suppressErrors?: boolean;
   nonRetryableErrors?: Iterable<new (...args: any[]) => any>;
   /**
@@ -26,20 +43,24 @@ type Config<TEvent extends ProcessableEvent> = {
   nonRetryableErrorHandler?: PermanentFailureHandler<TEvent>;
 };
 
-export type RecordProcessor<TEvent extends ProcessableEvent = ProcessableEvent> = (
+export type RecordProcessor<TEvent extends BatchEvent = BatchEvent> = (
   record: EntryType<TEvent['Records']>,
   context: Context
 ) => Promise<void>;
 
-export type ProcessableEvent = SQSEvent | DynamoDBStreamEvent | KinesisStreamEvent;
-export type ProcessableRecord<TEvent extends ProcessableEvent = ProcessableEvent> = EntryType<
+export type BatchEvent = SQSEvent | DynamoDBStreamEvent | KinesisStreamEvent;
+export type ProcessableRecord<TEvent extends BatchEvent = BatchEvent> = EntryType<
   TEvent['Records']
 >;
 
-export abstract class BatchProcessor<TEvent extends ProcessableEvent> {
+type BatchResponse = SQSBatchResponse | KinesisStreamBatchResponse | DynamoDBBatchResponse;
+type BatchItemFailures = BatchResponse['batchItemFailures'];
+
+export abstract class BatchProcessor<TEvent extends BatchEvent> {
   protected suppressErrors: boolean;
   protected nonRetryableErrors: Array<new (...args: any[]) => any>;
   protected handler: RecordProcessor;
+  protected logger?: Logger;
   protected permanentFailureHandler: PermanentFailureHandler;
 
   constructor({
@@ -47,18 +68,23 @@ export abstract class BatchProcessor<TEvent extends ProcessableEvent> {
     suppressErrors = false,
     nonRetryableErrors = [],
     nonRetryableErrorHandler = new DefaultPermanentFailureHandler(),
+    logger,
   }: Config<TEvent>) {
     this.suppressErrors = suppressErrors;
     this.nonRetryableErrors = [...nonRetryableErrors];
     this.handler = handler;
     this.permanentFailureHandler = nonRetryableErrorHandler;
+    this.logger = logger;
   }
 
-  async process({ Records }: TEvent, context: Context): Promise<SQSBatchResponse> {
+  // TODO: the return type can be extracted from union of handler types
+  async process({ Records }: TEvent, context: Context): Promise<BatchResponse> {
     const res = await Promise.allSettled(Records.map((record) => this.handler(record, context)));
 
-    const batchItemFailures: SQSBatchItemFailure[] = [];
     const permanentFailures: PermanentFailure[] = [];
+
+    const batchItemFailures: BatchItemFailures = [];
+    const errors: unknown[] = [];
 
     for (const [i, result] of res.entries()) {
       if (result.status === 'fulfilled') continue;
@@ -67,22 +93,35 @@ export abstract class BatchProcessor<TEvent extends ProcessableEvent> {
         permanentFailures.push({ record: Records[i], reason: result.reason });
       } else {
         batchItemFailures.push({ itemIdentifier: this.getFailureIdentifier(Records[i]) });
+        errors.push(result.reason);
       }
     }
 
     await this.permanentFailureHandler.handleRejections(permanentFailures, context).catch((err) => {
+      this.logger?.error(err, 'Failed handling permanent failures');
       /**
        * TODO: the java powetools fail everything to re-process the entire batch
        * in this case.
        *
-       * Which one is better?
+       * Which approach is better?
        */
-      batchItemFailures.push(
-        ...permanentFailures.map(({ record }) => ({
-          itemIdentifier: this.getFailureIdentifier(record),
-        }))
-      );
+      for (const { record, reason } of permanentFailures) {
+        batchItemFailures.push({ itemIdentifier: this.getFailureIdentifier(record) });
+        errors.push(reason);
+      }
     });
+
+    if (!batchItemFailures.length) {
+      this.logger?.info(`All ${Records.length} records successfully processed`);
+    } else {
+      const processingError = new BatchProcessingError(errors);
+
+      this.logger?.error(processingError, 'Some records failed processing');
+
+      if (batchItemFailures.length === Records.length) {
+        throw processingError;
+      }
+    }
 
     return { batchItemFailures };
   }
