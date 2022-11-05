@@ -1,6 +1,6 @@
 {
-  "name": "sqs-batch-processor",
-  "description": "",
+  "name": "lambda-batch-processor",
+  "description": "Utilities for processing batch records in AWS Lambda functions",
   "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,7 @@
     "name": "Cristian Petre",
     "email": "driimus@vivaldi.net"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.107",
     "@types/node": "^16.18.0",
