@@ -1,0 +1,22 @@
+{
+  "name": "base-batch-processor",
+  "description": "Concurrently process batch records with partial failure support",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "aws lambda",
+    "batch processor",
+    "sqs",
+    "kinesis",
+    "dynamodb streams"
+  ],
+  "author": {
+    "name": "Cristian Petre",
+    "email": "driimus@vivaldi.net"
+  },
+  "license": "MIT"
+}

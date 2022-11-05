@@ -1,16 +1,27 @@
 lockfileVersion: 5.4
 
-specifiers:
-  '@aws-sdk/client-sqs': ^3.190.0
-  '@types/aws-lambda': ^8.10.107
-  '@types/node': ^16.18.0
-  typescript: ^4.8.4
+importers:
 
-devDependencies:
-  '@aws-sdk/client-sqs': 3.190.0
-  '@types/aws-lambda': 8.10.107
-  '@types/node': 16.18.0
-  typescript: 4.8.4
+  .:
+    specifiers:
+      '@types/aws-lambda': ^8.10.107
+      '@types/node': ^16.18.0
+      typescript: ^4.8.4
+    devDependencies:
+      '@types/aws-lambda': 8.10.107
+      '@types/node': 16.18.0
+      typescript: 4.8.4
+
+  packages/base-batch-processor:
+    specifiers: {}
+
+  packages/permanent-failure-dlq:
+    specifiers:
+      '@aws-sdk/client-sqs': ^3.190.0
+      base-batch-processor: workspace:*
+    devDependencies:
+      '@aws-sdk/client-sqs': 3.190.0
+      base-batch-processor: link:../base-batch-processor
 
 packages:
 

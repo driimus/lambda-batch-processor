@@ -77,7 +77,6 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
     this.logger = logger;
   }
 
-  // TODO: the return type can be extracted from union of handler types
   async process({ Records }: TEvent, context: Context): Promise<BatchResponse> {
     const res = await Promise.allSettled(Records.map((record) => this.handler(record, context)));
 
