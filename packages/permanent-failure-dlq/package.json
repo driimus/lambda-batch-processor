@@ -1,0 +1,20 @@
+{
+  "name": "permanent-failure-dlq",
+  "version": "0.1.0",
+  "description": "Send non-retryable errors to a dead-letter SQS queue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Cristian Petre",
+    "email": "driimus@vivaldi.net"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-sqs": "^3.190.0",
+    "base-batch-processor": "workspace:*"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-sqs": "^3.190.0"
+  }
+}

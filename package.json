@@ -1,28 +1,30 @@
 {
-  "name": "sqs-batch-processor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "lambda-batch-processor",
+  "description": "Utilities for processing batch records in AWS Lambda functions",
+  "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "aws lambda",
     "batch processor",
-    "sqs"
+    "sqs",
+    "kinesis",
+    "dynamodb streams"
   ],
   "author": {
     "name": "Cristian Petre",
     "email": "driimus@vivaldi.net"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "@aws-sdk/client-sqs": "^3.190.0",
     "@types/aws-lambda": "^8.10.107",
     "@types/node": "^16.18.0",
     "typescript": "^4.8.4"
   },
-  "peerDependencies": {
-    "@aws-sdk/client-sqs": "^3.190.0"
-  }
+  "engines": {
+    "node": ">=16.15",
+    "pnpm": ">=7.14.2"
+  },
+  "packageManager": "pnpm@7.14.2"
 }

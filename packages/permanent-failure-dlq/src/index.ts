@@ -5,7 +5,7 @@ import {
   SQSClient,
 } from '@aws-sdk/client-sqs';
 import { Context, SQSEvent, SQSRecord } from 'aws-lambda';
-import { PermanentFailure, PermanentFailureHandler } from './nonRetryableErrorHandlers';
+import { PermanentFailure, PermanentFailureHandler } from 'base-batch-processor';
 
 // TODO: separate package for this
 /**
