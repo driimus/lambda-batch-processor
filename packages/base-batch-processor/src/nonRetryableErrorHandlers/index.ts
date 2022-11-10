@@ -1,5 +1,6 @@
-import { Context } from 'aws-lambda';
-import { BatchEvent, ProcessableRecord } from '../processors/processor';
+import type { Context } from 'aws-lambda';
+
+import type { BatchEvent, ProcessableRecord } from '../processors/processor';
 
 export type PermanentFailure<T extends ProcessableRecord = ProcessableRecord> = {
   record: T;
@@ -19,5 +20,5 @@ export interface PermanentFailureHandler<T extends BatchEvent = BatchEvent> {
  * TODO: does it need logging?
  */
 export class DefaultPermanentFailureHandler implements PermanentFailureHandler<BatchEvent> {
-  async handleRejections(failures: PermanentFailure[], context: Context): Promise<void> {}
+  async handleRejections(): Promise<void> {}
 }

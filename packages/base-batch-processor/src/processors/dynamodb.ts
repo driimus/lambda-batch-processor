@@ -1,4 +1,5 @@
-import { DynamoDBRecord, DynamoDBStreamEvent } from 'aws-lambda';
+import type { DynamoDBRecord, DynamoDBStreamEvent } from 'aws-lambda';
+
 import { BatchProcessor } from './processor';
 
 export class DynamoDBBatchProcessor extends BatchProcessor<DynamoDBStreamEvent> {

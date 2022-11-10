@@ -1,4 +1,5 @@
-import { KinesisStreamEvent, KinesisStreamRecord } from 'aws-lambda';
+import type { KinesisStreamEvent, KinesisStreamRecord } from 'aws-lambda';
+
 import { BatchProcessor } from './processor';
 
 export class KinesisBatchProcessor extends BatchProcessor<KinesisStreamEvent> {
