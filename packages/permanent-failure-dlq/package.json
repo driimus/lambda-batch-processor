@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Send non-retryable errors to a dead-letter SQS queue",
   "scripts": {
+    "build": "tsc",
+    "lint": "eslint --ext .ts .",
+    "format": "eslint --fix --ext .ts .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
