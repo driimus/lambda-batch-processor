@@ -1,1 +1,1 @@
-export * from './BatchProcessingError';
+export * from './batchProcessingError';

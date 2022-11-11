@@ -1,4 +1,5 @@
-import { SQSEvent, SQSRecord } from 'aws-lambda';
+import type { SQSEvent, SQSRecord } from 'aws-lambda';
+
 import { BatchProcessor } from './processor';
 
 export class SQSBatchProcessor extends BatchProcessor<SQSEvent> {
