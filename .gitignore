@@ -1,3 +1,9 @@
+# Dependencies
 node_modules
-packages/**/dist
+
+# Build artifacts
+dist
 .turbo
+
+# Test coverage
+coverage
