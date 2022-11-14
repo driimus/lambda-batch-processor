@@ -4,7 +4,9 @@ on:
 
 jobs:
   test:
-    uses: driimus/shared-workflows/.github/workflows/test.yml@main
+    uses: driimus/shared-workflows/.github/workflows/test.yml@feat/node-version
+    with:
+      node-version: 18
     secrets:
       turbo_token: ${{ secrets.TURBO_TOKEN }}
       turbo_team: ${{ secrets.TURBO_TEAM }}
