@@ -4,6 +4,13 @@ import type { SQSEvent, SQSRecord } from 'aws-lambda';
 import type { PermanentFailure, PermanentFailureHandler } from 'base-batch-processor';
 
 /**
+ * SQS batch actions can only manipulate up to 10 messages.
+ *
+ * @see https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-batch-api-actions.html
+ */
+const MAX_BATCH_SIZE = 10;
+
+/**
  * @example
  * ```ts
  * const processor = new BatchSQSProcessor({
@@ -15,7 +22,7 @@ export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEv
   constructor(public readonly queueUrl: string, protected client = new SQSClient({})) {}
 
   async handleRejections(failures: PermanentFailure<SQSRecord>[]): Promise<void> {
-    const Entries: SendMessageBatchRequestEntry[] = failures.map(({ record }) => {
+    const messages: SendMessageBatchRequestEntry[] = failures.map(({ record }) => {
       return {
         Id: record.messageId,
         MessageBody: record.body,
@@ -23,8 +30,14 @@ export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEv
       };
     });
 
-    // TODO: #15 batch request needs to be split into chunks of 10
-    await this.client.send(new SendMessageBatchCommand({ QueueUrl: this.queueUrl, Entries }));
+    for (let index = 0; index < messages.length; index += MAX_BATCH_SIZE) {
+      await this.client.send(
+        new SendMessageBatchCommand({
+          QueueUrl: this.queueUrl,
+          Entries: messages.slice(index, index + MAX_BATCH_SIZE),
+        })
+      );
+    }
   }
 
   private getMessageAttributes({ messageAttributes }: SQSRecord) {

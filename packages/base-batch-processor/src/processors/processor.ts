@@ -39,7 +39,7 @@ type Config<TEvent extends BatchEvent> = {
 
 export type RecordProcessor<TEvent extends BatchEvent = BatchEvent> = (
   record: EntryType<TEvent['Records']>,
-  context: Context
+  context?: Context
 ) => Promise<void>;
 
 export type BatchEvent = SQSEvent | DynamoDBStreamEvent | KinesisStreamEvent;
@@ -71,7 +71,7 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
     this.logger = logger;
   }
 
-  async process({ Records }: TEvent, context: Context): Promise<BatchResponse> {
+  async process({ Records }: TEvent, context?: Context): Promise<BatchResponse> {
     const results = await Promise.allSettled(
       Records.map((record) => this.handler(record, context))
     );

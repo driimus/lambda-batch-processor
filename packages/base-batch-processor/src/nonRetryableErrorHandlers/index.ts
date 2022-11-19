@@ -10,7 +10,7 @@ export type PermanentFailure<T extends ProcessableRecord = ProcessableRecord> = 
 export interface PermanentFailureHandler<T extends BatchEvent = BatchEvent> {
   handleRejections: (
     failures: PermanentFailure<ProcessableRecord<T>>[],
-    context: Context
+    context?: Context
   ) => Promise<void>;
 }
 
