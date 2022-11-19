@@ -9,10 +9,10 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:jest/recommended', 'plugin:unicorn/recommended'],
   parserOptions: {
     ecmaVersion: 2021,
-    sourceType: 'module',
-    project: ['./tsconfig.json'],
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json', './packages/*/tsconfig.json', './packages/**/*/tsconfig.json'],
   },
-  ignorePatterns: ['*.spec.ts', '*.integ.ts', '*.fixture.ts', '*.d.ts'],
+  ignorePatterns: ['*.d.ts'],
   overrides: [
     {
       files: ['*.ts'],
@@ -33,7 +33,7 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-unsafe-return': 'warn',
         '@typescript-eslint/no-unsafe-call': 'error',
-        '@typescript-eslint/no-unsafe-member-access': 'error',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',

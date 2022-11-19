@@ -6,7 +6,7 @@ import { mockClient } from 'aws-sdk-client-mock';
 import { SQSBatchProcessor } from 'base-batch-processor';
 import { sqsEventFactory, sqsMessageAttributeFactory, sqsRecordFactory } from 'mock-events';
 
-import { PermanentFailureDLQHandler } from '.';
+import { PermanentFailureDLQHandler } from '../src';
 
 const mockSQS = mockClient(SQSClient);
 
