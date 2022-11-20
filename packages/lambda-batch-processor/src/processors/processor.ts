@@ -24,10 +24,6 @@ export interface Logger {
 }
 
 type Config<TEvent extends BatchEvent> = {
-  /**
-   * Handler for processing each batch entry
-   */
-  handler: RecordProcessor<TEvent>;
   logger?: Logger;
   suppressErrors?: boolean;
   nonRetryableErrors?: Iterable<new (...arguments_: any[]) => any>;
@@ -57,13 +53,15 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
   protected logger?: Logger;
   protected permanentFailureHandler: PermanentFailureHandler;
 
-  constructor({
-    handler,
-    suppressErrors = false,
-    nonRetryableErrors = [],
-    nonRetryableErrorHandler = new DefaultPermanentFailureHandler(),
-    logger,
-  }: Config<TEvent>) {
+  constructor(
+    handler: RecordProcessor<TEvent>,
+    {
+      suppressErrors = false,
+      nonRetryableErrors = [],
+      nonRetryableErrorHandler = new DefaultPermanentFailureHandler(),
+      logger,
+    }: Config<TEvent> = {}
+  ) {
     this.suppressErrors = suppressErrors;
     this.nonRetryableErrors = [...nonRetryableErrors];
     this.handler = handler;
