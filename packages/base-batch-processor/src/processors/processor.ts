@@ -18,7 +18,7 @@ interface LogFunction {
   (message: string): void;
 }
 
-interface Logger {
+export interface Logger {
   info: LogFunction;
   error: LogFunction;
 }

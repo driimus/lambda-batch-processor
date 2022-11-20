@@ -55,7 +55,10 @@ importers:
       typescript: 4.8.4
 
   packages/base-batch-processor:
-    specifiers: {}
+    specifiers:
+      mock-events: workspace:*
+    devDependencies:
+      mock-events: link:../mock-events
 
   packages/permanent-failure-dlq:
     specifiers:
