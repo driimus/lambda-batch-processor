@@ -7,12 +7,12 @@ import { Factory } from 'fishery';
 import { Records } from '../events/sqs.json';
 
 export const sqsRecordFactory = Factory.define<SQSRecord>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return structuredClone(Records[0]);
 });
 
 export const sqsEventFactory = Factory.define<SQSEvent>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return structuredClone({ Records });
 });
 
