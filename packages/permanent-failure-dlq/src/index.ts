@@ -1,7 +1,7 @@
 import type { SendMessageBatchRequestEntry, SendMessageCommandInput } from '@aws-sdk/client-sqs';
 import { SendMessageBatchCommand, SQSClient } from '@aws-sdk/client-sqs';
+import type { PermanentFailure, PermanentFailureHandler } from '@driimus/lambda-batch-processor';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
-import type { PermanentFailure, PermanentFailureHandler } from 'base-batch-processor';
 
 /**
  * SQS batch actions can only manipulate up to 10 messages.

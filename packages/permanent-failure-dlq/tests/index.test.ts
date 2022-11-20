@@ -1,9 +1,9 @@
 import 'aws-sdk-client-mock-jest';
 
 import { SendMessageBatchCommand, SQSClient } from '@aws-sdk/client-sqs';
+import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
 import { faker } from '@faker-js/faker';
 import { mockClient } from 'aws-sdk-client-mock';
-import { SQSBatchProcessor } from 'base-batch-processor';
 import { sqsEventFactory, sqsMessageAttributeFactory, sqsRecordFactory } from 'mock-events';
 
 import { PermanentFailureDLQHandler } from '../src';

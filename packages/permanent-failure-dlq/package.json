@@ -1,12 +1,12 @@
 {
-  "name": "permanent-failure-dlq",
+  "name": "@driimus/permanent-failure-dlq",
   "version": "0.1.0",
   "description": "Send non-retryable errors to a dead-letter SQS queue",
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts .",
     "format": "eslint --fix --ext .ts .",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "keywords": [],
   "author": {
@@ -17,7 +17,7 @@
     "@aws-sdk/client-sqs": "^3.190.0",
     "aws-sdk-client-mock": "^2.0.0",
     "aws-sdk-client-mock-jest": "^2.0.0",
-    "base-batch-processor": "workspace:*",
+    "@driimus/lambda-batch-processor": "workspace:*",
     "mock-events": "workspace:*"
   },
   "peerDependencies": {

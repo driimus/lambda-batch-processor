@@ -9,8 +9,8 @@ import type {
 } from 'aws-lambda';
 
 import { BatchProcessingError } from '../errors';
-import type { PermanentFailure, PermanentFailureHandler } from '../nonRetryableErrorHandlers';
-import { DefaultPermanentFailureHandler } from '../nonRetryableErrorHandlers';
+import type { PermanentFailure, PermanentFailureHandler } from '../permanentFailureHandler';
+import { DefaultPermanentFailureHandler } from '../permanentFailureHandler';
 import type { EntryType } from '../types';
 
 interface LogFunction {
