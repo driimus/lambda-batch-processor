@@ -21,5 +21,8 @@
     "name": "Cristian Petre",
     "email": "driimus@vivaldi.net"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mock-events": "workspace:*"
+  }
 }
