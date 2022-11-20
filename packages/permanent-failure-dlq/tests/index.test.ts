@@ -78,14 +78,16 @@ describe('PermanentFailureDLQHandler', () => {
       message = 'Validation error';
     }
 
-    const processor = new SQSBatchProcessor({
+    const processor = new SQSBatchProcessor(
       // eslint-disable-next-line @typescript-eslint/require-await
-      handler: async (record) => {
+      async (record) => {
         if (record.body === 'invalid body') throw new ValidationError();
       },
-      nonRetryableErrorHandler: toDLQHandler,
-      nonRetryableErrors: [ValidationError],
-    });
+      {
+        nonRetryableErrorHandler: toDLQHandler,
+        nonRetryableErrors: [ValidationError],
+      }
+    );
 
     const invalidRecord = sqsRecordFactory.build({ body: 'invalid body' });
 

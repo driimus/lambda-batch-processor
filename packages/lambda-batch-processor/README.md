@@ -13,9 +13,16 @@ pnpm add @driimus/lambda-batch-processor
 ```ts
 import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
 
-const processor = new SQSBatchProcessor({
-  /** ... */
-});
+const processor = new SQSBatchProcessor(
+  async (record) => {
+    /** do stuff */
+  },
+  {
+    /** ...options */
+  }
+);
+
+export const handler = processor.process;
 ```
 
 Supported event sources:

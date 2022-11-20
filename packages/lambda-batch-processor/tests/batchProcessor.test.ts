@@ -21,12 +21,13 @@ describe('BatchProcessor', () => {
     message = 'Validation error';
   }
 
-  const processor = new TestProcessor({
-    handler: async (record) => {
-      if (record.body === 'retryable body') throw new ProcessingError();
-      if (record.body === 'invalid body') throw new ValidationError();
-      await Promise.resolve();
-    },
+  const handler = async (record: SQSRecord): Promise<void> => {
+    if (record.body === 'retryable body') throw new ProcessingError();
+    if (record.body === 'invalid body') throw new ValidationError();
+    await Promise.resolve();
+  };
+
+  const processor = new TestProcessor(handler, {
     nonRetryableErrors: [ValidationError],
   });
 
@@ -55,11 +56,7 @@ describe('BatchProcessor', () => {
     });
 
     it('allows suppressing processing errors', async () => {
-      const p = new TestProcessor({
-        handler: async (record) => {
-          if (record.body === 'retryable body') throw new ProcessingError();
-          await Promise.resolve();
-        },
+      const p = new TestProcessor(handler, {
         suppressErrors: true,
       });
       await expect(
@@ -90,11 +87,7 @@ describe('BatchProcessor', () => {
     it('surfaces failures with the non-retryable errors handler', async () => {
       const nonRetryableErrorHandler = new DefaultPermanentFailureHandler();
       const spy = jest.spyOn(nonRetryableErrorHandler, 'handleRejections');
-      const p = new TestProcessor({
-        handler: async (record) => {
-          if (record.body === 'invalid body') throw new ValidationError();
-          await Promise.resolve();
-        },
+      const p = new TestProcessor(handler, {
         nonRetryableErrors: [ValidationError],
         nonRetryableErrorHandler,
       });
@@ -122,12 +115,7 @@ describe('BatchProcessor', () => {
     });
 
     it('should allow providing a logger', async () => {
-      const p = new TestProcessor({
-        handler: async (record) => {
-          if (record.body === 'retryable body') throw new ProcessingError();
-          if (record.body === 'invalid body') throw new ValidationError();
-          await Promise.resolve();
-        },
+      const p = new TestProcessor(handler, {
         nonRetryableErrors: [ValidationError],
         // TODO: custom logger
         logger: new Console({ stdout: process.stdout }),
