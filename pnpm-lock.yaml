@@ -54,24 +54,27 @@ importers:
       turbo: 1.6.3
       typescript: 4.8.4
 
-  packages/base-batch-processor:
+  packages/lambda-batch-processor:
     specifiers:
       mock-events: workspace:*
     devDependencies:
       mock-events: link:../mock-events
 
+  packages/mock-events:
+    specifiers: {}
+
   packages/permanent-failure-dlq:
     specifiers:
       '@aws-sdk/client-sqs': ^3.190.0
+      '@driimus/lambda-batch-processor': workspace:*
       aws-sdk-client-mock: ^2.0.0
       aws-sdk-client-mock-jest: ^2.0.0
-      base-batch-processor: workspace:*
       mock-events: workspace:*
     devDependencies:
       '@aws-sdk/client-sqs': 3.190.0
+      '@driimus/lambda-batch-processor': link:../lambda-batch-processor
       aws-sdk-client-mock: 2.0.0
       aws-sdk-client-mock-jest: 2.0.0_aws-sdk-client-mock@2.0.0
-      base-batch-processor: link:../base-batch-processor
       mock-events: link:../mock-events
 
 packages:

@@ -3,7 +3,7 @@ import { Console } from 'node:console';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 import { sqsRecordFactory } from 'mock-events';
 
-import { DefaultPermanentFailureHandler } from '../src/nonRetryableErrorHandlers';
+import { DefaultPermanentFailureHandler } from '../src/permanentFailureHandler';
 import { BatchProcessor } from '../src/processors/processor';
 
 describe('BatchProcessor', () => {

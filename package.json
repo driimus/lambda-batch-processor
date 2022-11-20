@@ -1,5 +1,5 @@
 {
-  "name": "lambda-batch-processor",
+  "name": "root",
   "description": "Utilities for processing batch records in AWS Lambda functions",
   "private": true,
   "scripts": {
