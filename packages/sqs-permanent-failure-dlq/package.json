@@ -1,14 +1,19 @@
 {
-  "name": "@driimus/permanent-failure-dlq",
+  "name": "@driimus/sqs-permanent-failure-dlq",
   "version": "0.1.0",
-  "description": "Send non-retryable errors to a dead-letter SQS queue",
+  "description": "Send SQS messages causing non-retryable errors to a dead-letter SQS queue",
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts .",
     "format": "eslint --fix --ext .ts .",
     "test": "jest"
   },
-  "keywords": [],
+  "keywords": [
+    "aws lambda",
+    "batch processor",
+    "sqs",
+    "dlq"
+  ],
   "author": {
     "name": "Cristian Petre",
     "email": "driimus@vivaldi.net"

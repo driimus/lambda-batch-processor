@@ -1,5 +1,5 @@
 ---
-'permanent-failure-dlq': patch
+'@driimus/sqs-permanent-failure-dlq': patch
 ---
 
 fix: transfer failures to dlq in batches of 10
