@@ -1,6 +1,6 @@
-# Lambda Batch Processor
+# @driimus/lambda-batch-processor
 
-Largely inspired by the Python and Java Powertools.
+Concurrently process batch records with partial failure support.
 
 ## Installation
 
@@ -47,7 +47,8 @@ Supported event sources:
 Exceptions that occur during batch processing can be treated as permanent failures.
 
 This feature is inspired from the [AWS Lambda Powertools for Java](https://awslabs.github.io/aws-lambda-powertools-java/utilities/batch/#move-non-retryable-messages-to-a-dead-letter-queue), with one key difference:
-By default, messages that trigger permanent failures will not be reported. In the case of SQS messages, this will cause their deletion from the queue.
+By default, messages that trigger permanent failures will not be reported.
+In the case of SQS messages, the result will be their deletion from the queue.
 To send SQS messages to a dead-letter queue, you can use [`@driimus/sqs-permanent-failure-dlq`](../sqs-permanent-failure-dlq/README.md).
 
 ### Logging
@@ -57,3 +58,32 @@ which is modelled after [pino](https://github.com/pinojs/pino)'s function signat
 
 > **Note**
 > The provided logger should support serialising [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) objects.
+
+If using pino, it might be worth adding [pino-lambda](https://github.com/formidablelabs/pino-lambda),
+to preserve Lambda's standard log message format.
+
+```ts
+import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
+import pino from 'pino';
+import { lambdaRequestTracker, pinoLambdaDestination } from 'pino-lambda';
+
+const destination = pinoLambdaDestination();
+const withRequest = lambdaRequestTracker();
+
+const logger = pino({}, destination);
+
+const processor = new SQSBatchProcessor(
+  async (record) => {
+    /** do stuff */
+  },
+  {
+    logger,
+  }
+);
+
+export const handler = async (event, context) => {
+  withRequest(event, context);
+
+  return await processor.process(event, context);
+};
+```
