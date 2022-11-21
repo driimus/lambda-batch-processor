@@ -10,17 +10,14 @@ pnpm add @driimus/lambda-batch-processor
 
 ## Usage
 
+> **Warning** > [`ReportBatchItemFailures`](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-batchfailurereporting) must be enabled to allow retrying failed messages.
+
 ```ts
 import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
 
-const processor = new SQSBatchProcessor(
-  async (record) => {
-    /** do stuff */
-  },
-  {
-    /** ...options */
-  }
-);
+const processor = new SQSBatchProcessor(async (record) => {
+  /** do stuff */
+});
 
 export const handler = processor.process;
 ```
@@ -50,8 +47,8 @@ Supported event sources:
 Exceptions that occur during batch processing can be treated as permanent failures.
 
 This feature is inspired from the [AWS Lambda Powertools for Java](https://awslabs.github.io/aws-lambda-powertools-java/utilities/batch/#move-non-retryable-messages-to-a-dead-letter-queue), with one key difference:
-By default, messages that trigger permanent failures will be deleted from the queue.
-To send the messages to a dead-letter queue, you can use [@driimus/permanent-failure-dlq](../permanent-failure-dlq/README.md)
+By default, messages that trigger permanent failures will not be reported. In the case of SQS messages, this will cause their deletion from the queue.
+To send SQS messages to a dead-letter queue, you can use [`@driimus/sqs-permanent-failure-dlq`](../sqs-permanent-failure-dlq/README.md).
 
 ### Logging
 
