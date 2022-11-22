@@ -1,3 +1,4 @@
+/** @type {import('@types/eslint').ESLint.ConfigData} */
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
