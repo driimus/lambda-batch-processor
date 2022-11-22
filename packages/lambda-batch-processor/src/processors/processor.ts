@@ -33,10 +33,9 @@ type Config<TEvent extends BatchEvent> = {
   nonRetryableErrorHandler?: PermanentFailureHandler<TEvent>;
 };
 
-export type RecordProcessor<TEvent extends BatchEvent = BatchEvent> = (
-  record: EntryType<TEvent['Records']>,
-  context?: Context
-) => Promise<void>;
+export interface RecordProcessor<TEvent extends BatchEvent = BatchEvent> {
+  (record: ProcessableRecord<TEvent>, context?: Context): Promise<void>;
+}
 
 export type BatchEvent = SQSEvent | DynamoDBStreamEvent | KinesisStreamEvent;
 export type ProcessableRecord<TEvent extends BatchEvent = BatchEvent> = EntryType<
@@ -47,11 +46,11 @@ type BatchResponse = SQSBatchResponse | KinesisStreamBatchResponse | DynamoDBBat
 type BatchItemFailures = BatchResponse['batchItemFailures'];
 
 export abstract class BatchProcessor<TEvent extends BatchEvent> {
+  protected handler: RecordProcessor;
   protected suppressErrors: boolean;
   protected nonRetryableErrors: Array<new (...arguments_: any[]) => any>;
-  protected handler: RecordProcessor;
+  protected nonRetryableErrorHandler: PermanentFailureHandler;
   protected logger?: Logger;
-  protected permanentFailureHandler: PermanentFailureHandler;
 
   constructor(
     handler: RecordProcessor<TEvent>,
@@ -62,10 +61,10 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
       logger,
     }: Config<TEvent> = {}
   ) {
+    this.handler = handler;
     this.suppressErrors = suppressErrors;
     this.nonRetryableErrors = [...nonRetryableErrors];
-    this.handler = handler;
-    this.permanentFailureHandler = nonRetryableErrorHandler;
+    this.nonRetryableErrorHandler = nonRetryableErrorHandler;
     this.logger = logger;
   }
 
@@ -90,7 +89,7 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
       }
     }
 
-    await this.permanentFailureHandler
+    await this.nonRetryableErrorHandler
       .handleRejections(permanentFailures, context)
       .catch((error) => {
         this.logger?.error(error, 'Failed handling permanent failures');

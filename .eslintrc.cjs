@@ -27,6 +27,7 @@ module.exports = {
       rules: {
         'prefer-const': ['error', { destructuring: 'all' }],
         'prettier/prettier': 'warn',
+        '@typescript-eslint/member-ordering': 'warn',
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/no-non-null-asserted-nullish-coalescing': 'error',
         '@typescript-eslint/no-non-null-assertion': 'off',
