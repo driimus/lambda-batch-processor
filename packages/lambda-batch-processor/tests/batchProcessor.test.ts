@@ -1,4 +1,5 @@
 import { Console } from 'node:console';
+import { Stream } from 'node:stream';
 
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 import { sqsRecordFactory } from 'mock-events';
@@ -119,7 +120,7 @@ describe('BatchProcessor', () => {
       const p = new TestProcessor(handler, {
         nonRetryableErrors: [ValidationError],
         // TODO: custom logger
-        logger: new Console({ stdout: process.stdout }),
+        logger: new Console({ stdout: new Stream.PassThrough(), stderr: new Stream.PassThrough() }),
       });
 
       await expect(
