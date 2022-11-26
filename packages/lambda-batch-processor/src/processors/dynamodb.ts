@@ -1,6 +1,6 @@
 import type { DynamoDBRecord, DynamoDBStreamEvent } from 'aws-lambda';
 
-import { BatchProcessor } from './processor';
+import { BatchProcessor } from './processor.js';
 
 export class DynamoDBBatchProcessor extends BatchProcessor<DynamoDBStreamEvent> {
   protected getFailureIdentifier(record: DynamoDBRecord): string {

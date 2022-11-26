@@ -1,12 +1,14 @@
-import 'aws-sdk-client-mock-jest';
-
 import { SendMessageBatchCommand, SQSClient } from '@aws-sdk/client-sqs';
 import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
 import { faker } from '@faker-js/faker';
 import { mockClient } from 'aws-sdk-client-mock';
+import mockJestMatchers from 'aws-sdk-client-mock-jest';
 import { sqsEventFactory, sqsMessageAttributeFactory, sqsRecordFactory } from 'mock-events';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { PermanentFailureDLQHandler } from '../src';
+import { PermanentFailureDLQHandler } from '../src/index.js';
+
+expect.extend(mockJestMatchers);
 
 const mockSQS = mockClient(SQSClient);
 
@@ -72,7 +74,7 @@ describe('PermanentFailureDLQHandler', () => {
 
   it('should be injectable into batch processors', async () => {
     mockSQS.resolves({});
-    const failureHandlerSpy = jest.spyOn(toDLQHandler, 'handleRejections');
+    const failureHandlerSpy = vi.spyOn(toDLQHandler, 'handleRejections');
 
     class ValidationError extends Error {
       message = 'Validation error';

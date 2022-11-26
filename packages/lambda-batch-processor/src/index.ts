@@ -1,3 +1,3 @@
-export * from './errors';
-export * from './permanentFailureHandler';
-export * from './processors';
+export * from './errors/index.js';
+export * from './permanentFailureHandler/index.js';
+export * from './processors/index.js';

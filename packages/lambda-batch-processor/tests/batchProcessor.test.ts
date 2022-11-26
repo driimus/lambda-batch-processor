@@ -2,9 +2,10 @@ import { Console } from 'node:console';
 
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 import { sqsRecordFactory } from 'mock-events';
+import { describe, expect, it, vi } from 'vitest';
 
-import { DefaultPermanentFailureHandler } from '../src/permanentFailureHandler';
-import { BatchProcessor } from '../src/processors/processor';
+import { DefaultPermanentFailureHandler } from '../src/permanentFailureHandler/index.js';
+import { BatchProcessor } from '../src/processors/processor.js';
 
 describe('BatchProcessor', () => {
   class TestProcessor extends BatchProcessor<SQSEvent> {
@@ -86,7 +87,7 @@ describe('BatchProcessor', () => {
 
     it('surfaces failures with the non-retryable errors handler', async () => {
       const nonRetryableErrorHandler = new DefaultPermanentFailureHandler();
-      const spy = jest.spyOn(nonRetryableErrorHandler, 'handleRejections');
+      const spy = vi.spyOn(nonRetryableErrorHandler, 'handleRejections');
       const p = new TestProcessor(handler, {
         nonRetryableErrors: [ValidationError],
         nonRetryableErrorHandler,

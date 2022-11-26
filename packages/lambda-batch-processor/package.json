@@ -2,13 +2,17 @@
   "name": "@driimus/lambda-batch-processor",
   "description": "Concurrently process batch records with partial failure support",
   "version": "0.1.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.js",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts .",
     "format": "eslint --fix --ext .ts .",
-    "test": "jest"
+    "test": "vitest run"
   },
   "keywords": [
     "aws lambda",

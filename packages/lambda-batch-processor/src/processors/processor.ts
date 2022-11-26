@@ -1,17 +1,18 @@
-import type {
-  Context,
-  DynamoDBBatchResponse,
-  DynamoDBStreamEvent,
-  KinesisStreamBatchResponse,
-  KinesisStreamEvent,
-  SQSBatchResponse,
-  SQSEvent,
-} from 'aws-lambda';
+import type { Context } from 'aws-lambda';
 
-import { BatchProcessingError } from '../errors';
-import type { PermanentFailure, PermanentFailureHandler } from '../permanentFailureHandler';
-import { DefaultPermanentFailureHandler } from '../permanentFailureHandler';
-import type { EntryType } from '../types';
+import { BatchProcessingError } from '../errors/index.js';
+import type {
+  PermanentFailure,
+  PermanentFailureHandler,
+} from '../permanentFailureHandler/index.js';
+import { DefaultPermanentFailureHandler } from '../permanentFailureHandler/index.js';
+import type {
+  BatchEvent,
+  BatchItemFailures,
+  BatchResponse,
+  ProcessableRecord,
+  RecordProcessor,
+} from '../types/index.js';
 
 interface LogFunction {
   (object: object | unknown, message?: string): void;
@@ -32,18 +33,6 @@ type Config<TEvent extends BatchEvent> = {
    */
   nonRetryableErrorHandler?: PermanentFailureHandler<TEvent>;
 };
-
-export interface RecordProcessor<TEvent extends BatchEvent = BatchEvent> {
-  (record: ProcessableRecord<TEvent>, context?: Context): Promise<void>;
-}
-
-export type BatchEvent = SQSEvent | DynamoDBStreamEvent | KinesisStreamEvent;
-export type ProcessableRecord<TEvent extends BatchEvent = BatchEvent> = EntryType<
-  TEvent['Records']
->;
-
-type BatchResponse = SQSBatchResponse | KinesisStreamBatchResponse | DynamoDBBatchResponse;
-type BatchItemFailures = BatchResponse['batchItemFailures'];
 
 export abstract class BatchProcessor<TEvent extends BatchEvent> {
   protected handler: RecordProcessor;

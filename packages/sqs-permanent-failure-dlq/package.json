@@ -2,11 +2,17 @@
   "name": "@driimus/sqs-permanent-failure-dlq",
   "version": "0.1.0",
   "description": "Send SQS messages causing non-retryable errors to a dead-letter SQS queue",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts .",
     "format": "eslint --fix --ext .ts .",
-    "test": "jest"
+    "test": "vitest run"
   },
   "keywords": [
     "aws lambda",
@@ -19,10 +25,10 @@
     "email": "driimus@vivaldi.net"
   },
   "devDependencies": {
-    "@aws-sdk/client-sqs": "^3.190.0",
+    "@aws-sdk/client-sqs": "^3.216.0",
+    "@driimus/lambda-batch-processor": "workspace:*",
     "aws-sdk-client-mock": "^2.0.0",
     "aws-sdk-client-mock-jest": "^2.0.0",
-    "@driimus/lambda-batch-processor": "workspace:*",
     "mock-events": "workspace:*"
   },
   "peerDependencies": {
