@@ -2,9 +2,12 @@
   "name": "mock-events",
   "private": true,
   "description": "Utility for mocking AWS events",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
-  "scripts": {},
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
   "author": {
     "name": "Cristian Petre",
     "email": "driimus@vivaldi.net"

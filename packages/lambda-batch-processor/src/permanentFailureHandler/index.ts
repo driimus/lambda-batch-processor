@@ -1,6 +1,6 @@
 import type { Context } from 'aws-lambda';
 
-import type { BatchEvent, ProcessableRecord } from '../processors/processor';
+import type { BatchEvent, ProcessableRecord } from '../types/index.js';
 
 export type PermanentFailure<T extends ProcessableRecord = ProcessableRecord> = {
   record: T;

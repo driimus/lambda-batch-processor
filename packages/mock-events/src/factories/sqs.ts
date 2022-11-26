@@ -4,16 +4,16 @@ import { faker } from '@faker-js/faker';
 import type { SQSEvent, SQSMessageAttribute, SQSRecord } from 'aws-lambda';
 import { Factory } from 'fishery';
 
-import { Records } from '../events/sqs.json';
+import Event from '../events/sqs.json' assert { type: 'json' };
 
 export const sqsRecordFactory = Factory.define<SQSRecord>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return structuredClone(Records[0]);
+  return structuredClone(Event.Records[0]);
 });
 
 export const sqsEventFactory = Factory.define<SQSEvent>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return structuredClone({ Records });
+  return structuredClone({ Records: Event.Records });
 });
 
 class SQSMessageAttributeFactory extends Factory<SQSMessageAttribute> {
