@@ -2,6 +2,26 @@
   "name": "@driimus/sqs-permanent-failure-dlq",
   "version": "0.1.1",
   "description": "Send SQS messages causing non-retryable errors to a dead-letter SQS queue",
+  "keywords": [
+    "aws lambda",
+    "batch processor",
+    "sqs",
+    "dlq"
+  ],
+  "homepage": "https://github.com/driimus/lambda-batch-processor/blob/main/packages/sqs-permanent-failure-dlq#readme",
+  "bugs": {
+    "url": "https://github.com/driimus/lambda-batch-processor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/driimus/lambda-batch-processor.git",
+    "directory": "packages/sqs-permanent-failure-dlq"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Cristian Petre",
+    "email": "driimus@vivaldi.net"
+  },
   "type": "module",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,19 +30,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint --ext .ts .",
     "format": "eslint --fix --ext .ts .",
+    "lint": "eslint --ext .ts .",
     "test": "vitest run"
-  },
-  "keywords": [
-    "aws lambda",
-    "batch processor",
-    "sqs",
-    "dlq"
-  ],
-  "author": {
-    "name": "Cristian Petre",
-    "email": "driimus@vivaldi.net"
   },
   "devDependencies": {
     "@aws-sdk/client-sqs": "^3.216.0",

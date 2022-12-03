@@ -1,17 +1,17 @@
 {
   "name": "mock-events",
-  "private": true,
   "version": "0.0.1",
+  "private": true,
   "description": "Utility for mocking AWS events",
+  "license": "MIT",
+  "author": {
+    "name": "Cristian Petre",
+    "email": "driimus@vivaldi.net"
+  },
   "type": "module",
   "exports": "./dist/index.js",
   "types": "./dist/index.js",
   "scripts": {
     "build": "tsc"
-  },
-  "author": {
-    "name": "Cristian Petre",
-    "email": "driimus@vivaldi.net"
-  },
-  "license": "MIT"
+  }
 }
