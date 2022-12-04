@@ -10,14 +10,6 @@ import type { SQSEvent, SQSRecord } from 'aws-lambda';
  */
 const MAX_BATCH_SIZE = 10;
 
-/**
- * @example
- * ```ts
- * const processor = new BatchSQSProcessor({
- *
- * })
- * ```
- */
 export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEvent> {
   constructor(public readonly queueUrl: string, protected client = new SQSClient({})) {}
 
