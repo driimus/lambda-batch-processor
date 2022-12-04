@@ -16,8 +16,6 @@ export interface PermanentFailureHandler<T extends BatchEvent = BatchEvent> {
 
 /**
  * Deletes entries from the source SQS queue by marking them as successfully processed.
- *
- * TODO: does it need logging?
  */
 export class DefaultPermanentFailureHandler implements PermanentFailureHandler<BatchEvent> {
   async handleRejections(): Promise<void> {}
