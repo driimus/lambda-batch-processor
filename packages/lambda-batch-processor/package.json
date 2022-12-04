@@ -33,7 +33,7 @@
     "build": "tsc",
     "format": "eslint --fix --ext .ts .",
     "lint": "eslint --ext .ts .",
-    "test": "vitest run"
+    "test": "vitest run --coverage"
   },
   "devDependencies": {
     "mock-events": "workspace:*"
