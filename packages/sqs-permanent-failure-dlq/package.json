@@ -1,6 +1,6 @@
 {
   "name": "@driimus/sqs-permanent-failure-dlq",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Send SQS messages causing non-retryable errors to a dead-letter SQS queue",
   "keywords": [
     "aws lambda",
