@@ -24,7 +24,7 @@ export interface Logger {
   error: LogFunction;
 }
 
-type Config<TEvent extends BatchEvent> = {
+export type BatchProcessorOptions<TEvent extends BatchEvent> = {
   logger?: Logger;
   suppressErrors?: boolean;
   nonRetryableErrors?: Iterable<new (...arguments_: any[]) => any>;
@@ -48,7 +48,7 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
       nonRetryableErrors = [],
       nonRetryableErrorHandler = new DefaultPermanentFailureHandler(),
       logger,
-    }: Config<TEvent> = {}
+    }: BatchProcessorOptions<TEvent> = {}
   ) {
     this.handler = handler;
     this.suppressErrors = suppressErrors;
