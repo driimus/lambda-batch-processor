@@ -36,7 +36,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "mock-events": "workspace:*"
+    "@driimus/aws-event-factory": "workspace:*"
   },
   "engines": {
     "node": ">=16.15.0"

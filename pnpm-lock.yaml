@@ -46,28 +46,28 @@ importers:
       typescript: 4.8.4
       vitest: 0.25.3
 
+  packages/aws-event-factory:
+    specifiers: {}
+
   packages/lambda-batch-processor:
     specifiers:
-      mock-events: workspace:*
+      '@driimus/aws-event-factory': workspace:*
     devDependencies:
-      mock-events: link:../mock-events
-
-  packages/mock-events:
-    specifiers: {}
+      '@driimus/aws-event-factory': link:../aws-event-factory
 
   packages/sqs-permanent-failure-dlq:
     specifiers:
       '@aws-sdk/client-sqs': ^3.216.0
+      '@driimus/aws-event-factory': workspace:*
       '@driimus/lambda-batch-processor': workspace:*
       aws-sdk-client-mock: ^2.0.0
       aws-sdk-client-mock-jest: ^2.0.0
-      mock-events: workspace:*
     devDependencies:
       '@aws-sdk/client-sqs': 3.216.0
+      '@driimus/aws-event-factory': link:../aws-event-factory
       '@driimus/lambda-batch-processor': link:../lambda-batch-processor
       aws-sdk-client-mock: 2.0.0
       aws-sdk-client-mock-jest: 2.0.0_aws-sdk-client-mock@2.0.0
-      mock-events: link:../mock-events
 
 packages:
 

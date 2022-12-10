@@ -1,8 +1,8 @@
 import { Console } from 'node:console';
 import { Stream } from 'node:stream';
 
+import { sqsRecordFactory } from '@driimus/aws-event-factory';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
-import { sqsRecordFactory } from 'mock-events';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DefaultPermanentFailureHandler } from '../src/permanentFailureHandler/index.js';
