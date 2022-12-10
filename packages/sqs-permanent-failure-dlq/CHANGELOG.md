@@ -1,5 +1,11 @@
 # @driimus/sqs-permanent-failure-dlq
 
+## 0.1.3
+
+### Patch Changes
+
+- [#27](https://github.com/driimus/lambda-batch-processor/pull/27) [`54d40e1`](https://github.com/driimus/lambda-batch-processor/commit/54d40e11d022971059914a7a3dd92333c9947b94) Thanks [@driimus](https://github.com/driimus)! - fix(types): include `@types/aws-lambda` as optional peer
+
 ## 0.1.2
 
 ### Patch Changes

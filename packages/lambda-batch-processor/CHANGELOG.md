@@ -1,5 +1,13 @@
 # @driimus/lambda-batch-processor
 
+## 0.1.2
+
+### Patch Changes
+
+- [#27](https://github.com/driimus/lambda-batch-processor/pull/27) [`54d40e1`](https://github.com/driimus/lambda-batch-processor/commit/54d40e11d022971059914a7a3dd92333c9947b94) Thanks [@driimus](https://github.com/driimus)! - fix(types): include `@types/aws-lambda` as optional peer
+
+- [#24](https://github.com/driimus/lambda-batch-processor/pull/24) [`2e248ea`](https://github.com/driimus/lambda-batch-processor/commit/2e248eaacd786af3f6829f36d9ac6073de5f9ced) Thanks [@driimus](https://github.com/driimus)! - feat(types): expose processor options
+
 ## 0.1.1
 
 ### Patch Changes
