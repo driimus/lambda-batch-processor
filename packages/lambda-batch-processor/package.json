@@ -38,6 +38,14 @@
   "devDependencies": {
     "@driimus/aws-event-factory": "workspace:*"
   },
+  "peerDependencies": {
+    "@types/aws-lambda": "^8.10.109"
+  },
+  "peerDependenciesMeta": {
+    "@types/aws-lambda": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">=16.15.0"
   }
