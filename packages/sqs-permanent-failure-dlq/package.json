@@ -35,14 +35,14 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@aws-sdk/client-sqs": "^3.216.0",
+    "@aws-sdk/client-sqs": "^3.226.0",
     "@driimus/aws-event-factory": "workspace:*",
     "@driimus/lambda-batch-processor": "workspace:*",
-    "aws-sdk-client-mock": "^2.0.0",
-    "aws-sdk-client-mock-jest": "^2.0.0"
+    "aws-sdk-client-mock": "^2.0.1",
+    "aws-sdk-client-mock-jest": "^2.0.1"
   },
   "peerDependencies": {
-    "@aws-sdk/client-sqs": "^3.190.0",
+    "@aws-sdk/client-sqs": "^3.226.0",
     "@types/aws-lambda": "^8.10.109"
   },
   "peerDependenciesMeta": {
