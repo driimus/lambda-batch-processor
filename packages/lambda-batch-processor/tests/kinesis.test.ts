@@ -1,4 +1,4 @@
-import { kinesisRecordFactory } from 'mock-events';
+import { kinesisRecordFactory } from '@driimus/aws-event-factory';
 import { describe, expect, it } from 'vitest';
 
 import { KinesisBatchProcessor } from '../src/index.js';

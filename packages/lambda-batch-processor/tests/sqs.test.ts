@@ -1,4 +1,4 @@
-import { sqsRecordFactory } from 'mock-events';
+import { sqsRecordFactory } from '@driimus/aws-event-factory';
 import { describe, expect, it } from 'vitest';
 
 import { SQSBatchProcessor } from '../src/index.js';

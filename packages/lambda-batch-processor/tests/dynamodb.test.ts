@@ -1,4 +1,4 @@
-import { dynamodbRecordFactory } from 'mock-events';
+import { dynamodbRecordFactory } from '@driimus/aws-event-factory';
 import { describe, expect, it } from 'vitest';
 
 import { DynamoDBBatchProcessor } from '../src/index.js';
