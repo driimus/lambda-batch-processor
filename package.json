@@ -19,7 +19,7 @@
     "@changesets/changelog-github": "^0.4.7",
     "@changesets/cli": "^2.25.2",
     "@faker-js/faker": "^7.6.0",
-    "@types/aws-lambda": "^8.10.107",
+    "@types/aws-lambda": "^8.10.109",
     "@types/node": "^16.18.0",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
