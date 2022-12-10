@@ -7,9 +7,15 @@ jobs:
     strategy:
       matrix:
         node-version: [16, 18]
-    uses: driimus/shared-workflows/.github/workflows/test.yml@feat/node-version
+    uses: driimus/shared-workflows/.github/workflows/test.yml@feat/modular-workflows
     with:
       node-version: ${{ matrix.node-version }}
+    secrets:
+      turbo_token: ${{ secrets.TURBO_TOKEN }}
+      turbo_team: ${{ secrets.TURBO_TEAM }}
+
+  lint:
+    uses: driimus/shared-workflows/.github/workflows/lint.yml@feat/modular-workflows
     secrets:
       turbo_token: ${{ secrets.TURBO_TOKEN }}
       turbo_team: ${{ secrets.TURBO_TEAM }}

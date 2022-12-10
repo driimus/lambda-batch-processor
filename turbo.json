@@ -3,11 +3,14 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**"],
+      "outputMode": "new-only"
     },
     "test": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "env": ["NODE_VERSION"],
+      "outputs": [],
+      "outputMode": "new-only"
     },
     "lint": {
       "dependsOn": ["^build"],
