@@ -1,5 +1,11 @@
 # @driimus/sqs-permanent-failure-dlq
 
+## 0.1.4
+
+### Patch Changes
+
+- [#31](https://github.com/driimus/lambda-batch-processor/pull/31) [`9df1c42`](https://github.com/driimus/lambda-batch-processor/commit/9df1c42f6af23c43b87adbee47f1e52c336718d6) Thanks [@driimus](https://github.com/driimus)! - feat: lazy-load sqs client
+
 ## 0.1.3
 
 ### Patch Changes
