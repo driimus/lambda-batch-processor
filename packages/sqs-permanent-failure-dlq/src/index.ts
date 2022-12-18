@@ -11,7 +11,16 @@ import type { SQSEvent, SQSRecord } from 'aws-lambda';
 const MAX_BATCH_SIZE = 10;
 
 export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEvent> {
-  constructor(public readonly queueUrl: string, protected client = new SQSClient({})) {}
+  #client?: SQSClient;
+
+  constructor(public readonly queueUrl: string, client?: SQSClient) {
+    this.#client = client;
+  }
+
+  protected get client() {
+    if (!this.#client) this.#client = new SQSClient({});
+    return this.#client;
+  }
 
   async handleRejections(failures: PermanentFailure<SQSRecord>[]): Promise<void> {
     const messages: SendMessageBatchRequestEntry[] = failures.map(({ record }) => {
