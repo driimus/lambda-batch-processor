@@ -4,6 +4,7 @@ Test data factories for different AWS Lambda event sources. Built using [fishery
 
 ## Supported Lambda event sources
 
+- [Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 - [Amazon DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.Lambda.html)
 - [Amazon EventBridge](https://aws.amazon.com/eventbridge/)
 - [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/)
