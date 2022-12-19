@@ -6,6 +6,7 @@ Test data factories for different AWS Lambda event sources. Built using [fishery
 
 - [Amazon DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.Lambda.html)
 - [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/)
+- [Amazon S3](https://aws.amazon.com/s3/)
 - [Amazon SQS](https://aws.amazon.com/sqs/)
 
 ## Installation
