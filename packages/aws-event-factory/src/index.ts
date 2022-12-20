@@ -1,4 +1,5 @@
 export * from './apiGateway.js';
+export * from './cloudWatchLogs.js';
 export * from './cognito/index.js';
 export * from './dynamodb.js';
 export * from './eventBridge.js';
