@@ -9,6 +9,7 @@ Test data factories for different AWS Lambda event sources. Built using [fishery
 - [Amazon EventBridge](https://aws.amazon.com/eventbridge/)
 - [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/)
 - [Amazon S3](https://aws.amazon.com/s3/)
+- [Amazon SNS](https://aws.amazon.com/sqs/)
 - [Amazon SQS](https://aws.amazon.com/sqs/)
 
 ## Installation
