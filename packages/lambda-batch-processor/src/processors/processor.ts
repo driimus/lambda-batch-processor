@@ -39,7 +39,7 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
   protected suppressErrors: boolean;
   protected nonRetryableErrors: Array<new (...arguments_: any[]) => any>;
   protected nonRetryableErrorHandler: PermanentFailureHandler;
-  protected logger?: Logger;
+  protected logger: Logger | undefined;
 
   constructor(
     handler: RecordProcessor<TEvent>,
