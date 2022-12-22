@@ -1,4 +1,8 @@
-import type { SendMessageBatchRequestEntry, SendMessageCommandInput } from '@aws-sdk/client-sqs';
+import type {
+  MessageAttributeValue,
+  SendMessageBatchRequestEntry,
+  SendMessageCommandInput,
+} from '@aws-sdk/client-sqs';
 import { SendMessageBatchCommand, SQSClient } from '@aws-sdk/client-sqs';
 import type { PermanentFailure, PermanentFailureHandler } from '@driimus/lambda-batch-processor';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
@@ -11,7 +15,7 @@ import type { SQSEvent, SQSRecord } from 'aws-lambda';
 const MAX_BATCH_SIZE = 10;
 
 export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEvent> {
-  #client?: SQSClient;
+  #client: SQSClient | undefined;
 
   constructor(public readonly queueUrl: string, client?: SQSClient) {
     this.#client = client;
@@ -52,7 +56,7 @@ export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEv
         // TODO: these types are not implemented yet
         // StringListValues: attribute.stringListValues,
         // BinaryListValues: attribute.binaryListValues,
-      };
+      } as MessageAttributeValue;
     }
 
     return attributes;
