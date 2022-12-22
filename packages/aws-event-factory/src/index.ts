@@ -6,5 +6,6 @@ export * from './eventBridge.js';
 export * from './kinesis.js';
 export * from './msk.js';
 export * from './s3.js';
+export * from './secretsManager.js';
 export * from './sns.js';
 export * from './sqs.js';
