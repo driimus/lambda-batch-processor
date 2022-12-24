@@ -4,13 +4,18 @@ Test data factories for different AWS Lambda event sources. Built using [fishery
 
 ## Supported Lambda event sources
 
+- [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
+- [Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 - [Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 - [Amazon DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.Lambda.html)
 - [Amazon EventBridge](https://aws.amazon.com/eventbridge/)
 - [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/)
+- [Amazon Lex v2](https://docs.aws.amazon.com/lexv2/latest/dg/lambda.html)
+- [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html)
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [Amazon SNS](https://aws.amazon.com/sqs/)
 - [Amazon SQS](https://aws.amazon.com/sqs/)
+- [Amazon SecretsManager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-lambda-function-overview.html)
 
 ## Installation
 
