@@ -1,5 +1,11 @@
 # @driimus/aws-event-factory
 
+## 0.1.2
+
+### Patch Changes
+
+- [`ab0247a`](https://github.com/driimus/lambda-batch-processor/commit/ab0247a832db1e19d35114e84cda6cc6b3c0ef50) Thanks [@driimus](https://github.com/driimus)! - Update list of supported events
+
 ## 0.1.1
 
 ### Patch Changes
