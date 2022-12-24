@@ -1,5 +1,11 @@
 # @driimus/sqs-permanent-failure-dlq
 
+## 0.1.5
+
+### Patch Changes
+
+- [`1966782`](https://github.com/driimus/lambda-batch-processor/commit/1966782952d93ee1bde6022734b4427053773937) Thanks [@driimus](https://github.com/driimus)! - Use exact optional property types.
+
 ## 0.1.4
 
 ### Patch Changes
