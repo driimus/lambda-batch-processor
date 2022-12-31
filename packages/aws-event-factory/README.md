@@ -1,5 +1,7 @@
 # @driimus/aws-event-factory
 
+[![npm](https://img.shields.io/npm/v/@driimus/aws-event-factory.svg?style=flat)](https://www.npmjs.com/package/@driimus/aws-event-factory)
+
 Test data factories for different AWS Lambda event sources. Built using [fishery](https://github.com/thoughtbot/fishery).
 
 ## Supported Lambda event sources

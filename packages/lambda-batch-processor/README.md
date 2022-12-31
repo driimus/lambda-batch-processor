@@ -1,5 +1,7 @@
 # @driimus/lambda-batch-processor
 
+[![npm](https://img.shields.io/npm/v/@driimus/lambda-batch-processor.svg?style=flat)](https://www.npmjs.com/package/@driimus/lambda-batch-processor)
+
 Concurrently process batch records with partial failure support.
 
 ## Installation

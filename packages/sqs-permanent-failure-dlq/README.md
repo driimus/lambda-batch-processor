@@ -1,5 +1,7 @@
 # @driimus/sqs-permanent-failure-dlq
 
+[![npm](https://img.shields.io/npm/v/@driimus/sqs-permanent-failure-dlq.svg?style=flat)](https://www.npmjs.com/package/@driimus/sqs-permanent-failure-dlq)
+
 Non-retryable error handler for [`@driimus/lambda-batch-processor`](../lambda-batch-processor/README.md)
 that sends corresponding SQS messages to a dead-letter SQS queue.
 
