@@ -44,8 +44,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.0(eslint@8.27.0)
       eslint-plugin-turbo:
-        specifier: ^0.0.4
-        version: 0.0.4(eslint@8.27.0)
+        specifier: ^0.0.10
+        version: 0.0.10(eslint@8.27.0)
       eslint-plugin-unicorn:
         specifier: ^44.0.2
         version: 44.0.2(eslint@8.27.0)
@@ -2318,10 +2318,10 @@ packages:
       eslint: 8.27.0
     dev: true
 
-  /eslint-plugin-turbo@0.0.4(eslint@8.27.0):
-    resolution: {integrity: sha512-dfmYE/iPvoJInQq+5E/0mj140y/rYwKtzZkn3uVK8+nvwC5zmWKQ6ehMWrL4bYBkGzSgpOndZM+jOXhPQ2m8Cg==}
+  /eslint-plugin-turbo@0.0.10(eslint@8.27.0):
+    resolution: {integrity: sha512-T7QRwF4rjBQCJD9AHLHn9ShtHCHNkfIZW5Oio92WtQYhoU5jZCU3ynU+ONFXLuvoUx4dJ19WergIyHL+DwL2+g==}
     peerDependencies:
-      eslint: ^7.23.0 || ^8.0.0
+      eslint: '>6.6.0'
     dependencies:
       eslint: 8.27.0
     dev: true
