@@ -1,5 +1,11 @@
 # @driimus/aws-event-factory
 
+## 0.1.3
+
+### Patch Changes
+
+- [#50](https://github.com/driimus/lambda-batch-processor/pull/50) [`c14d8bc`](https://github.com/driimus/lambda-batch-processor/commit/c14d8bc24e05814749fdfd3b277ad1216d8eebcb) Thanks [@renovate](https://github.com/apps/renovate)! - fix: declare faker as peer dependency
+
 ## 0.1.2
 
 ### Patch Changes
