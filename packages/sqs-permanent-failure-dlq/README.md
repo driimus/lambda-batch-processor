@@ -7,6 +7,9 @@ that sends corresponding SQS messages to a dead-letter SQS queue.
 
 ## Installation
 
+> **Warning**\
+> This is an ES only package. Before installing, make sure that your project's configuration supports ECMAScript modules.
+
 ```sh
 pnpm add @driimus/lambda-batch-processor @driimus/sqs-permanent-failure-dlq @aws-sdk/client-sqs
 ```
