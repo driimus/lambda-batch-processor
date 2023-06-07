@@ -21,8 +21,11 @@ Test data factories for different AWS Lambda event sources. Built using [fishery
 
 ## Installation
 
+> **Warning**\
+> This is an ES only package. Before installing, make sure that your project's configuration supports ECMAScript modules.
+
 ```sh
-pnpm add --save-dev fishery @driimus/aws-event-factory
+pnpm add --save-dev @faker-js/faker fishery @driimus/aws-event-factory
 ```
 
 ## Usage
