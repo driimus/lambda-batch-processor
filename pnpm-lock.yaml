@@ -107,11 +107,11 @@ importers:
         specifier: workspace:*
         version: link:../lambda-batch-processor
       aws-sdk-client-mock:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^3.0.0
+        version: 3.0.0
       aws-sdk-client-mock-jest:
-        specifier: ^2.0.1
-        version: 2.0.1(aws-sdk-client-mock@2.0.1)
+        specifier: ^3.0.0
+        version: 3.0.0(aws-sdk-client-mock@3.0.0)
 
 packages:
 
@@ -1688,18 +1688,18 @@ packages:
     resolution: {integrity: sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==}
     dev: true
 
-  /aws-sdk-client-mock-jest@2.0.1(aws-sdk-client-mock@2.0.1):
-    resolution: {integrity: sha512-mQN3rWzk+b9+kxMAeV9fxu8+lDOFpmvBc+dgU9Sd+HkF+0Sl9O9upFRS7NudyVDcq7KF/30jsC2Dju2Q28nlIw==}
+  /aws-sdk-client-mock-jest@3.0.0(aws-sdk-client-mock@3.0.0):
+    resolution: {integrity: sha512-oV1rBQZc4UumLbzZAhi8UAehUq+k75hkQYGLrVIP0iJj85Z9xw+EaSsmJke/KQ8Z3vng+Xv1xbounsxpvZpunQ==}
     peerDependencies:
-      aws-sdk-client-mock: 2.0.1
+      aws-sdk-client-mock: 3.0.0
     dependencies:
       '@types/jest': 28.1.8
-      aws-sdk-client-mock: 2.0.1
+      aws-sdk-client-mock: 3.0.0
       tslib: 2.4.1
     dev: true
 
-  /aws-sdk-client-mock@2.0.1:
-    resolution: {integrity: sha512-Ib/AnI8ZdoIxOBbKSs28TUwJb7FI/AYVYn48PcXx6guk5fBs4GZJJEc+Ci9aImRtVmgO6jHN/6Etz17fr6j3qw==}
+  /aws-sdk-client-mock@3.0.0:
+    resolution: {integrity: sha512-4mBiWhuLYLZe1+K/iB8eYy5SAZyW2se+Keyh5u9QouMt6/qJ5SRZhss68xvUX5g3ApzROJ06QPRziYHP6buuvQ==}
     dependencies:
       '@types/sinon': 10.0.13
       sinon: 14.0.2

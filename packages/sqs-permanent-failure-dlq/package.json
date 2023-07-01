@@ -38,8 +38,8 @@
     "@aws-sdk/client-sqs": "^3.226.0",
     "@driimus/aws-event-factory": "workspace:*",
     "@driimus/lambda-batch-processor": "workspace:*",
-    "aws-sdk-client-mock": "^2.0.1",
-    "aws-sdk-client-mock-jest": "^2.0.1"
+    "aws-sdk-client-mock": "^3.0.0",
+    "aws-sdk-client-mock-jest": "^3.0.0"
   },
   "peerDependencies": {
     "@aws-sdk/client-sqs": "^3.226.0",
