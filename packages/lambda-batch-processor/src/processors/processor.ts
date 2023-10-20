@@ -15,7 +15,8 @@ import type {
 } from '../types/index.js';
 
 interface LogFunction {
-  (object: object | unknown, message?: string): void;
+  <T extends object>(object: T, message?: string): void;
+  (object: unknown, message?: string): void;
   (message: string): void;
 }
 
