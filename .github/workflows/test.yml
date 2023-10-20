@@ -6,7 +6,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [18, 20]
     uses: driimus/shared-workflows/.github/workflows/test.yml@feat/modular-workflows
     with:
       node-version: ${{ matrix.node-version }}
