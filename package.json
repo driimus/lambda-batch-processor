@@ -29,7 +29,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-turbo": "^1.10.16",
-    "eslint-plugin-unicorn": "^48.0.1",
+    "eslint-plugin-unicorn": "^50.0.0",
     "eslint-plugin-vitest": "^0.3.3",
     "fishery": "^2.2.2",
     "prettier": "^3.0.0",
