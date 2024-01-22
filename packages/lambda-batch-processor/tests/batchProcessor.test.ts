@@ -44,7 +44,7 @@ describe('BatchProcessor', () => {
             sqsRecordFactory.build({ body: 'retryable body' }),
             sqsRecordFactory.build(),
           ],
-        })
+        }),
       ).resolves.toStrictEqual({
         batchItemFailures: [
           {
@@ -70,7 +70,7 @@ describe('BatchProcessor', () => {
             sqsRecordFactory.build({ body: 'retryable body' }),
             sqsRecordFactory.build(),
           ],
-        })
+        }),
       ).resolves.toStrictEqual({
         batchItemFailures: expect.any(Array),
       });
@@ -80,7 +80,7 @@ describe('BatchProcessor', () => {
       await expect(
         processor.process({
           Records: [sqsRecordFactory.build(), sqsRecordFactory.build({ body: 'invalid body' })],
-        })
+        }),
       ).resolves.toStrictEqual({
         batchItemFailures: [],
       });
@@ -98,7 +98,7 @@ describe('BatchProcessor', () => {
       await expect(
         p.process({
           Records: [sqsRecordFactory.build(), sqsRecordFactory.build({ body: 'invalid body' })],
-        })
+        }),
       ).resolves.toStrictEqual({
         batchItemFailures: [
           {
@@ -112,7 +112,7 @@ describe('BatchProcessor', () => {
       await expect(
         processor.process({
           Records: [sqsRecordFactory.build({ body: 'retryable body' })],
-        })
+        }),
       ).rejects.toThrow(AggregateError);
     });
 
@@ -130,7 +130,7 @@ describe('BatchProcessor', () => {
             sqsRecordFactory.build({ body: 'invalid body' }),
             sqsRecordFactory.build({ body: 'retryable body' }),
           ],
-        })
+        }),
       ).resolves.toStrictEqual({
         batchItemFailures: expect.any(Array),
       });

@@ -18,7 +18,7 @@ describe('KinesisBatchProcessor', () => {
     await expect(
       processor.process({
         Records,
-      })
+      }),
     ).resolves.toStrictEqual({
       batchItemFailures: failingRecords.map(({ kinesis: { sequenceNumber } }) => ({
         itemIdentifier: sequenceNumber,

@@ -49,7 +49,7 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
       nonRetryableErrors = [],
       nonRetryableErrorHandler = new DefaultPermanentFailureHandler(),
       logger,
-    }: BatchProcessorOptions<TEvent> = {}
+    }: BatchProcessorOptions<TEvent> = {},
   ) {
     this.handler = handler;
     this.suppressErrors = suppressErrors;
@@ -60,7 +60,7 @@ export abstract class BatchProcessor<TEvent extends BatchEvent> {
 
   async process({ Records }: TEvent, context?: Context): Promise<BatchResponse> {
     const results = await Promise.allSettled(
-      Records.map((record) => this.handler(record, context))
+      Records.map((record) => this.handler(record, context)),
     );
 
     const permanentFailures: PermanentFailure[] = [];
