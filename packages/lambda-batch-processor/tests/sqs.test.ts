@@ -16,7 +16,7 @@ describe('SQSBatchProcessor', () => {
     await expect(
       processor.process({
         Records,
-      })
+      }),
     ).resolves.toStrictEqual({
       batchItemFailures: failingRecords.map(({ messageId }) => ({ itemIdentifier: messageId })),
     });

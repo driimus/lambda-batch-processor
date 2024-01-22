@@ -17,7 +17,10 @@ const MAX_BATCH_SIZE = 10;
 export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEvent> {
   #client: SQSClient | undefined;
 
-  constructor(public readonly queueUrl: string, client?: SQSClient) {
+  constructor(
+    public readonly queueUrl: string,
+    client?: SQSClient,
+  ) {
     this.#client = client;
   }
 
@@ -40,7 +43,7 @@ export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEv
         new SendMessageBatchCommand({
           QueueUrl: this.queueUrl,
           Entries: messages.slice(index, index + MAX_BATCH_SIZE),
-        })
+        }),
       );
     }
   }

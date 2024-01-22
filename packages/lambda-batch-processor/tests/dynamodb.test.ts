@@ -19,7 +19,7 @@ describe('DynamoDBBatchProcessor', () => {
     await expect(
       processor.process({
         Records,
-      })
+      }),
     ).resolves.toStrictEqual({
       batchItemFailures: failingRecords.map(({ dynamodb: { SequenceNumber } = {} }) => ({
         itemIdentifier: SequenceNumber,

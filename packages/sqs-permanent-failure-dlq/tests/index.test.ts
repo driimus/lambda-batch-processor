@@ -72,7 +72,7 @@ describe('PermanentFailureDLQHandler', () => {
     await expect(toDLQHandler.handleRejections(failures)).resolves.toBeUndefined();
     expect(mockSQS).toHaveReceivedCommandTimes(
       SendMessageBatchCommand,
-      Math.ceil(failures.length / 10)
+      Math.ceil(failures.length / 10),
     );
   });
 
@@ -92,22 +92,22 @@ describe('PermanentFailureDLQHandler', () => {
       {
         nonRetryableErrorHandler: toDLQHandler,
         nonRetryableErrors: [ValidationError],
-      }
+      },
     );
 
     const invalidRecord = sqsRecordFactory.build({ body: 'invalid body' });
 
     await expect(
       processor.process(
-        sqsEventFactory.build({ Records: [invalidRecord, ...sqsRecordFactory.buildList(2)] })
-      )
+        sqsEventFactory.build({ Records: [invalidRecord, ...sqsRecordFactory.buildList(2)] }),
+      ),
     ).resolves.toStrictEqual({
       batchItemFailures: [],
     });
     expect(failureHandlerSpy).toHaveBeenCalledTimes(1);
     expect(failureHandlerSpy).toHaveBeenCalledWith(
       [expect.objectContaining({ record: invalidRecord, reason: expect.any(ValidationError) })],
-      undefined
+      undefined,
     );
   });
 });
