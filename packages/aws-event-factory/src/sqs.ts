@@ -29,11 +29,11 @@ export const sqsEventFactory = Factory.define<SQSEvent>(() => {
 
 class SQSMessageAttributeFactory extends Factory<SQSMessageAttribute> {
   string() {
-    return this.params({ dataType: 'String', stringValue: faker.datatype.string() });
+    return this.params({ dataType: 'String', stringValue: faker.string.sample() });
   }
 
   number() {
-    return this.params({ dataType: 'Number', stringValue: faker.datatype.number().toString() });
+    return this.params({ dataType: 'Number', stringValue: faker.number.int().toString() });
   }
 
   binary() {
@@ -42,5 +42,5 @@ class SQSMessageAttributeFactory extends Factory<SQSMessageAttribute> {
 }
 
 export const sqsMessageAttributeFactory = SQSMessageAttributeFactory.define(() => {
-  return { dataType: 'String', stringValue: faker.datatype.string() };
+  return { dataType: 'String', stringValue: faker.string.sample() };
 });
