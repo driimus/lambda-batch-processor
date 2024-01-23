@@ -6,11 +6,11 @@ import { Factory } from 'fishery';
 
 class SNSMessageAttributeFactory extends Factory<SNSMessageAttribute> {
   string() {
-    return this.params({ Type: 'String', Value: faker.datatype.string() });
+    return this.params({ Type: 'String', Value: faker.string.sample() });
   }
 
   number() {
-    return this.params({ Type: 'Number', Value: faker.datatype.number().toString() });
+    return this.params({ Type: 'Number', Value: faker.number.int().toString() });
   }
 
   binary() {
@@ -19,7 +19,7 @@ class SNSMessageAttributeFactory extends Factory<SNSMessageAttribute> {
 }
 
 export const snsMessageAttributeFactory = SNSMessageAttributeFactory.define(() => {
-  return { Type: 'String', Value: faker.datatype.string() };
+  return { Type: 'String', Value: faker.string.sample() };
 });
 
 export const snsMessageFactory = Factory.define<SNSMessage>(() => {

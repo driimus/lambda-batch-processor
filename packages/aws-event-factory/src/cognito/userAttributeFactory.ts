@@ -15,7 +15,7 @@ export const userAttributeFactory = Factory.define<MockUserAttributes>(() => {
   return {
     sub: randomUUID(),
     email_verified: 'true',
-    name: faker.name.fullName(),
+    name: faker.person.fullName(),
     email: faker.internet.email(),
   };
 });
