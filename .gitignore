@@ -1,3 +1,17 @@
+# Logs
+logs
+*.log
+.pnpm-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
 # Dependencies
 node_modules
 
@@ -7,3 +21,13 @@ dist
 
 # Test coverage
 coverage
+
+# macOS files
+.DS_Store
+
+# editor files
+.vscode
+.idea
+
+# Output of 'npm pack'
+*.tgz

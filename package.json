@@ -3,6 +3,7 @@
   "private": true,
   "description": "Utilities for processing batch records in AWS Lambda functions",
   "license": "MIT",
+  "type": "module",
   "author": {
     "name": "Cristian Petre",
     "email": "driimus@vivaldi.net"
@@ -27,14 +28,15 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
-    "eslint-plugin-turbo": "^1.11.3",
-    "eslint-plugin-unicorn": "^50.0.1",
-    "eslint-plugin-vitest": "^0.3.20",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "eslint-plugin-turbo": "^1.12.5",
+    "eslint-plugin-unicorn": "^51.0.1",
+    "eslint-plugin-vitest": "^0.3.22",
     "fishery": "^2.2.2",
     "prettier": "^3.2.4",
     "turbo": "^1.10.2",
     "typescript": "^5.3.3",
+    "typescript-eslint": "^7.1.1",
     "vitest": "^1.2.1"
   },
   "packageManager": "pnpm@8.14.2+sha256.a2dd287205a53bb4322937530d4a17f86269f63fe00a62a03e9e458d3ad027ff",

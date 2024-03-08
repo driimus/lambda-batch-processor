@@ -1,5 +1,0 @@
-{
-  "editor.formatOnSave": true,
-  "vitest.include": ["packages/**/*.{test,spec}.{ts,mts,cts}"],
-  "typescript.tsdk": "node_modules/typescript/lib"
-}
