@@ -30,8 +30,8 @@
   ],
   "scripts": {
     "build": "tsc",
-    "format": "eslint --fix --ext .ts .",
-    "lint": "eslint --ext .ts .",
+    "format": "eslint --fix .",
+    "lint": "eslint .",
     "test": "vitest run"
   },
   "devDependencies": {

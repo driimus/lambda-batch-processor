@@ -16,11 +16,11 @@ describe('BatchProcessor', () => {
   }
 
   class ProcessingError extends Error {
-    message = 'Processing error';
+    override message = 'Processing error';
   }
 
   class ValidationError extends Error {
-    message = 'Validation error';
+    override message = 'Validation error';
   }
 
   const handler = async (record: SQSRecord): Promise<void> => {

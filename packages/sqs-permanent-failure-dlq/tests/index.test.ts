@@ -81,7 +81,7 @@ describe('PermanentFailureDLQHandler', () => {
     const failureHandlerSpy = vi.spyOn(toDLQHandler, 'handleRejections');
 
     class ValidationError extends Error {
-      message = 'Validation error';
+      override message = 'Validation error';
     }
 
     const processor = new SQSBatchProcessor(
