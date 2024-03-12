@@ -7,7 +7,7 @@ that sends corresponding SQS messages to a dead-letter SQS queue.
 
 ## Installation
 
-> **Warning**\
+> [!WARNING]
 > This is an ES only package. Before installing, make sure that your project's configuration supports ECMAScript modules.
 
 ```sh
@@ -28,7 +28,7 @@ const processor = new SQSBatchProcessor(
   },
   {
     nonRetryableErrorHandler: new PermanentFailureDLQHandler(queueUrl),
-  }
+  },
 );
 
 export const handler = processor.process;
