@@ -19,9 +19,14 @@ Test data factories for different AWS Lambda event sources. Built using [fishery
 - [Amazon SQS](https://aws.amazon.com/sqs/)
 - [Amazon SecretsManager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-lambda-function-overview.html)
 
+## Goals
+
+This package prioritizes structural integrity over veracity. While some of the generated data is truthful,
+explicit inputs should always be provided for the parts of an event that you really care about.
+
 ## Installation
 
-> **Warning**\
+> [!WARNING]
 > This is an ES only package. Before installing, make sure that your project's configuration supports ECMAScript modules.
 
 ```sh
@@ -55,6 +60,7 @@ More examples:
 - [test SQS events](../sqs-permanent-failure-dlq/tests/index.test.ts)
 - [test DynamoDB Streams events](../lambda-batch-processor/tests/dynamodb.test.ts)
 
-## Similar projects
+## Prior art
 
 - [@serverless/event-mocks](https://github.com/serverless/event-mocks)
+- [mock-aws-events](https://github.com/Metronome-Industries/node-mock-aws-events)

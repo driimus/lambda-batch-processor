@@ -6,7 +6,7 @@ Concurrently process batch records with partial failure support.
 
 ## Installation
 
-> **Warning**\
+> [!WARNING]
 > This is an ES only package. Before installing, make sure that your project's configuration supports ECMAScript modules.
 
 ```sh
@@ -15,8 +15,7 @@ pnpm add @driimus/lambda-batch-processor
 
 ## Usage
 
-> **Warning**\
-> [`ReportBatchItemFailures`](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-batchfailurereporting) must be enabled to allow retrying failed messages.
+> [!WARNING] > [`ReportBatchItemFailures`](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-batchfailurereporting) must be enabled to allow retrying failed messages.
 
 ```ts
 import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
@@ -62,7 +61,7 @@ To send SQS messages to a dead-letter queue, you can use [`@driimus/sqs-permanen
 You can enable logging by providing a logger compatible with the `Logger` interface,
 which is modelled after [pino](https://github.com/pinojs/pino)'s function signatures.
 
-> **Note**
+> [!NOTE]
 > The provided logger should support serialising [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) objects.
 
 If using pino, it might be worth adding [pino-lambda](https://github.com/formidablelabs/pino-lambda),
@@ -84,7 +83,7 @@ const processor = new SQSBatchProcessor(
   },
   {
     logger,
-  }
+  },
 );
 
 export const handler = async (event, context) => {
