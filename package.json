@@ -39,7 +39,7 @@
     "typescript-eslint": "^7.1.1",
     "vitest": "^1.2.1"
   },
-  "packageManager": "pnpm@8.14.2+sha256.a2dd287205a53bb4322937530d4a17f86269f63fe00a62a03e9e458d3ad027ff",
+  "packageManager": "pnpm@9.0.1",
   "engines": {
     "node": ">=18.18.2",
     "pnpm": ">=8.9.2"
