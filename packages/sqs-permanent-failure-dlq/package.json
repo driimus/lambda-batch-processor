@@ -39,7 +39,7 @@
     "@driimus/aws-event-factory": "workspace:*",
     "@driimus/lambda-batch-processor": "workspace:*",
     "aws-sdk-client-mock": "^4.0.0",
-    "aws-sdk-client-mock-jest": "^4.0.0"
+    "aws-sdk-client-mock-jest": "file:package.tgz"
   },
   "peerDependencies": {
     "@aws-sdk/client-sqs": "^3.226.0",

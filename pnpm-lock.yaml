@@ -113,8 +113,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       aws-sdk-client-mock-jest:
-        specifier: ^4.0.0
-        version: 4.0.0(aws-sdk-client-mock@4.0.0)
+        specifier: file:package.tgz
+        version: file:packages/sqs-permanent-failure-dlq/package.tgz(aws-sdk-client-mock@4.0.0)
 
 packages:
 
@@ -1007,8 +1007,9 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-sdk-client-mock-jest@4.0.0:
-    resolution: {integrity: sha512-Q8WWWYpcEZK8m0OA42Lm2LaJgStAfqvmMYVtEs2Ibz+nwjZDZSK/xlsYbdsFz93RO9cUPXbQMeyKUXeqdjh49g==}
+  aws-sdk-client-mock-jest@file:packages/sqs-permanent-failure-dlq/package.tgz:
+    resolution: {integrity: sha512-Fq0V1KuOwSrozOUWew8MIirudr5uMWj9rqsCVkZhOgYWzm0TfoYvv/RJbrgf144NYMjTtLVfraE8XaMpaGYgew==, tarball: file:packages/sqs-permanent-failure-dlq/package.tgz}
+    version: 4.0.0
     peerDependencies:
       aws-sdk-client-mock: 4.0.0
 
@@ -3977,7 +3978,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.0.0
 
-  aws-sdk-client-mock-jest@4.0.0(aws-sdk-client-mock@4.0.0):
+  aws-sdk-client-mock-jest@file:packages/sqs-permanent-failure-dlq/package.tgz(aws-sdk-client-mock@4.0.0):
     dependencies:
       aws-sdk-client-mock: 4.0.0
       expect: 29.7.0
