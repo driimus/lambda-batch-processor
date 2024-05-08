@@ -1,5 +1,11 @@
 # @driimus/sqs-permanent-failure-dlq
 
+## 0.1.6
+
+### Patch Changes
+
+- [#79](https://github.com/driimus/lambda-batch-processor/pull/79) [`d05b9b9`](https://github.com/driimus/lambda-batch-processor/commit/d05b9b9caf82c01fa80f530a6ce47accf1c7ef78) Thanks [@driimus](https://github.com/driimus)! - chore: package provenance statements
+
 ## 0.1.5
 
 ### Patch Changes
