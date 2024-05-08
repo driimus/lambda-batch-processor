@@ -13,6 +13,9 @@
   "bugs": {
     "url": "https://github.com/driimus/lambda-batch-processor/issues"
   },
+  "publishConfig": {
+    "provenance": true
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/driimus/lambda-batch-processor.git",
