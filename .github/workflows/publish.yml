@@ -4,6 +4,11 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
 jobs:
   packages:
     uses: driimus/shared-workflows/.github/workflows/publish.yml@main
