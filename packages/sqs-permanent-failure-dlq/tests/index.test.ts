@@ -7,12 +7,12 @@ import {
 import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
 import { faker } from '@faker-js/faker';
 import { mockClient } from 'aws-sdk-client-mock';
-import mockJestMatchers from 'aws-sdk-client-mock-jest';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import mockJestMatchers from 'aws-sdk-client-mock-jest/vitest';
+import { beforeEach, describe, it, vi } from 'vitest';
 
 import { PermanentFailureDLQHandler } from '../src/index.js';
 
-expect.extend(mockJestMatchers);
+// expect.extend(mockJestMatchers);
 
 const mockSQS = mockClient(SQSClient);
 
