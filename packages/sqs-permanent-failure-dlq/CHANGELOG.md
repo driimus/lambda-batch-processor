@@ -1,5 +1,11 @@
 # @driimus/sqs-permanent-failure-dlq
 
+## 0.1.7
+
+### Patch Changes
+
+- [#82](https://github.com/driimus/lambda-batch-processor/pull/82) [`52985a8`](https://github.com/driimus/lambda-batch-processor/commit/52985a8c66643df821c5c3cdaf358ee24049f404) Thanks [@driimus](https://github.com/driimus)! - docs: mention optional types
+
 ## 0.1.6
 
 ### Patch Changes

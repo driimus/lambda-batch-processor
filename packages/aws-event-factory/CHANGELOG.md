@@ -1,5 +1,13 @@
 # @driimus/aws-event-factory
 
+## 0.2.1
+
+### Patch Changes
+
+- [#82](https://github.com/driimus/lambda-batch-processor/pull/82) [`97ae354`](https://github.com/driimus/lambda-batch-processor/commit/97ae354bc3689a4aadd50ff653df613a53ff94bc) Thanks [@driimus](https://github.com/driimus)! - fix: only ship build artifacts
+
+- [#82](https://github.com/driimus/lambda-batch-processor/pull/82) [`52985a8`](https://github.com/driimus/lambda-batch-processor/commit/52985a8c66643df821c5c3cdaf358ee24049f404) Thanks [@driimus](https://github.com/driimus)! - docs: mention optional types
+
 ## 0.2.0
 
 ### Minor Changes

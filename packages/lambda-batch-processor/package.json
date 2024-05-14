@@ -1,6 +1,6 @@
 {
   "name": "@driimus/lambda-batch-processor",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Concurrently process batch records with partial failure support",
   "keywords": [
     "aws lambda",
