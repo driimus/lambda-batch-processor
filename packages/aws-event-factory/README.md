@@ -33,6 +33,15 @@ explicit inputs should always be provided for the parts of an event that you rea
 pnpm add --save-dev @faker-js/faker fishery @driimus/aws-event-factory
 ```
 
+### Type hints
+
+For types to work as expected, `@types/aws-lambda` must be installed:
+
+```sh
+pnpm add --save-dev @types/aws-lambda
+
+```
+
 ## Usage
 
 Make sure to check out fishery's [documentation](https://github.com/thoughtbot/fishery#documentation) for a more detailed API Reference of the exposed factories.

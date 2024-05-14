@@ -14,6 +14,15 @@ that sends corresponding SQS messages to a dead-letter SQS queue.
 pnpm add @driimus/lambda-batch-processor @driimus/sqs-permanent-failure-dlq @aws-sdk/client-sqs
 ```
 
+### Type hints
+
+For types to work as expected, `@types/aws-lambda` must be installed:
+
+```sh
+pnpm add --save-dev @types/aws-lambda
+
+```
+
 ## Usage
 
 ```ts
