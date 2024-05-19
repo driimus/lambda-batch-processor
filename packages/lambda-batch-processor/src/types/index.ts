@@ -20,3 +20,6 @@ export type ProcessableRecord<TEvent extends BatchEvent = BatchEvent> = EntryTyp
 >;
 export type BatchResponse = SQSBatchResponse | KinesisStreamBatchResponse | DynamoDBBatchResponse;
 export type BatchItemFailures = BatchResponse['batchItemFailures'];
+export interface FailureIdProvider<T extends ProcessableRecord = ProcessableRecord> {
+  (this: void, record: T): string;
+}
