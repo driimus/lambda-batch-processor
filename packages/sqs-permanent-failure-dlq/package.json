@@ -33,9 +33,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "format": "eslint --fix .",
-    "lint": "eslint .",
-    "test": "vitest run"
+    "format": "eslint --fix",
+    "lint": "eslint",
+    "test": "vitest run --coverage.thresholds.100"
   },
   "devDependencies": {
     "@aws-sdk/client-sqs": "^3.226.0",
