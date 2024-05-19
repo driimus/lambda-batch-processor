@@ -57,25 +57,6 @@ describe('BatchProcessor', () => {
       });
     });
 
-    it('allows suppressing processing errors', async () => {
-      const p = new TestProcessor(handler, {
-        suppressErrors: true,
-      });
-      await expect(
-        p.process({
-          Records: [
-            sqsRecordFactory.build(),
-            sqsRecordFactory.build({ body: 'retryable body' }),
-            sqsRecordFactory.build(),
-            sqsRecordFactory.build({ body: 'retryable body' }),
-            sqsRecordFactory.build(),
-          ],
-        }),
-      ).resolves.toStrictEqual({
-        batchItemFailures: expect.any(Array),
-      });
-    });
-
     it('defaults to deleting messages with non-retryable errors', async () => {
       await expect(
         processor.process({

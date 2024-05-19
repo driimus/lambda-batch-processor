@@ -27,38 +27,35 @@ export interface Logger {
 
 export type BatchProcessorOptions<TEvent extends BatchEvent> = {
   logger?: Logger;
-  suppressErrors?: boolean;
   nonRetryableErrors?: Iterable<new (...arguments_: any[]) => any>;
   /**
-   * @see DefaultPermanentFailureHandler for default behaviour
+   * @see {@link DefaultPermanentFailureHandler} for default behaviour
    */
   nonRetryableErrorHandler?: PermanentFailureHandler<TEvent>;
 };
 
-export abstract class BatchProcessor<TEvent extends BatchEvent> {
-  protected handler: RecordProcessor;
-  protected suppressErrors: boolean;
-  protected nonRetryableErrors: Array<new (...arguments_: any[]) => any>;
-  protected nonRetryableErrorHandler: PermanentFailureHandler;
+export abstract class BatchProcessor<
+  TEvent extends BatchEvent,
+  TRecord extends EntryType<TEvent['Records']> = EntryType<TEvent['Records']>,
+> {
+  protected nonRetryableErrors: BatchProcessorOptions<TEvent>['nonRetryableErrors'];
+  protected nonRetryableErrorHandler: PermanentFailureHandler<TEvent>;
   protected logger: Logger | undefined;
 
   constructor(
-    handler: RecordProcessor<TEvent>,
+    protected handler: RecordProcessor<TEvent>,
     {
-      suppressErrors = false,
-      nonRetryableErrors = [],
+      nonRetryableErrors,
       nonRetryableErrorHandler = new DefaultPermanentFailureHandler(),
       logger,
     }: BatchProcessorOptions<TEvent> = {},
   ) {
-    this.handler = handler;
-    this.suppressErrors = suppressErrors;
-    this.nonRetryableErrors = [...nonRetryableErrors];
+    this.nonRetryableErrors = nonRetryableErrors;
     this.nonRetryableErrorHandler = nonRetryableErrorHandler;
     this.logger = logger;
   }
 
-  async process({ Records }: TEvent, context?: Context): Promise<BatchResponse> {
+  async process({ Records }: { Records: TRecord[] }, context?: Context): Promise<BatchResponse> {
     const results = await Promise.allSettled(
       Records.map((record) => this.handler(record, context)),
     );
