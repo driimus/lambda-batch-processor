@@ -73,6 +73,7 @@ describe('BatchProcessor', () => {
       const p = new TestProcessor(handler, {
         nonRetryableErrors: [ValidationError],
         nonRetryableErrorHandler,
+        logger: new Console({ stdout: new Stream.PassThrough(), stderr: new Stream.PassThrough() }),
       });
 
       spy.mockRejectedValueOnce(new Error('something went wrong'));
@@ -106,11 +107,7 @@ describe('BatchProcessor', () => {
 
       await expect(
         p.process({
-          Records: [
-            sqsRecordFactory.build(),
-            sqsRecordFactory.build({ body: 'invalid body' }),
-            sqsRecordFactory.build({ body: 'retryable body' }),
-          ],
+          Records: sqsRecordFactory.buildList(1),
         }),
       ).resolves.toStrictEqual({
         batchItemFailures: expect.any(Array),
