@@ -1,18 +1,12 @@
 import type { Context } from 'aws-lambda';
 
 import { BatchProcessingError } from '../errors/index.js';
-import type {
-  PermanentFailure,
-  PermanentFailureHandler,
+import {
+  DefaultPermanentFailureHandler,
+  type PermanentFailureHandler,
 } from '../permanentFailureHandler/index.js';
-import { DefaultPermanentFailureHandler } from '../permanentFailureHandler/index.js';
-import type {
-  BatchEvent,
-  BatchItemFailures,
-  BatchResponse,
-  ProcessableRecord,
-  RecordProcessor,
-} from '../types/index.js';
+import type { BatchEvent, BatchResponse, EntryType, RecordProcessor } from '../types/index.js';
+import { FailureAccumulator } from './failureAccumulator.js';
 
 interface LogFunction {
   <T extends object>(object: T, message?: string): void;
@@ -60,24 +54,13 @@ export abstract class BatchProcessor<
       Records.map((record) => this.handler(record, context)),
     );
 
-    const permanentFailures: PermanentFailure[] = [];
-
-    const batchItemFailures: BatchItemFailures = [];
-    const errors: unknown[] = [];
-
-    for (const [index, result] of results.entries()) {
-      if (result.status === 'fulfilled') continue;
-
-      if (this.isNonRetryableError(result.reason)) {
-        permanentFailures.push({ record: Records[index], reason: result.reason });
-      } else {
-        batchItemFailures.push({ itemIdentifier: this.getFailureIdentifier(Records[index]) });
-        errors.push(result.reason);
-      }
-    }
+    const failureAccumulator = new FailureAccumulator(
+      this.getFailureIdentifier,
+      this.nonRetryableErrors,
+    ).addResults(Records, results);
 
     await this.nonRetryableErrorHandler
-      .handleRejections(permanentFailures, context)
+      .handleRejections(failureAccumulator.permanentFailures, context)
       .catch((error) => {
         this.logger?.error(error, 'Failed handling permanent failures');
         /**
@@ -86,30 +69,23 @@ export abstract class BatchProcessor<
          *
          * Which approach is better?
          */
-        for (const { record, reason } of permanentFailures) {
-          batchItemFailures.push({ itemIdentifier: this.getFailureIdentifier(record) });
-          errors.push(reason);
-        }
+        failureAccumulator.surfacePermanentFailures();
       });
 
-    if (batchItemFailures.length === 0) {
+    if (failureAccumulator.batchItemFailures.length === 0) {
       this.logger?.info(`All ${Records.length} records successfully processed`);
     } else {
-      const processingError = new BatchProcessingError(errors);
+      const processingError = new BatchProcessingError(failureAccumulator.batchItemFailures);
 
       this.logger?.error(processingError, 'Some records failed processing');
 
-      if (batchItemFailures.length === Records.length) {
+      if (failureAccumulator.batchItemFailures.length === Records.length) {
         throw processingError;
       }
     }
 
-    return { batchItemFailures };
+    return failureAccumulator.toResponse();
   }
 
-  private isNonRetryableError(error: unknown) {
-    return this.nonRetryableErrors.some((NonRetryableError) => error instanceof NonRetryableError);
-  }
-
-  protected abstract getFailureIdentifier(record: ProcessableRecord): string;
+  protected abstract getFailureIdentifier(this: void, record: TRecord): string;
 }
