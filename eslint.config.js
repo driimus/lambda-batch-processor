@@ -11,6 +11,11 @@ export default tsEslint.config(
   eslint.configs.recommended,
   ...tsEslint.configs.recommendedTypeChecked,
   {
+    rules: {
+      complexity: ['warn', { max: 6 }],
+    },
+  },
+  {
     languageOptions: {
       parserOptions: {
         project: true,
