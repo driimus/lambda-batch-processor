@@ -1,5 +1,15 @@
 # @driimus/lambda-batch-processor
 
+## 0.2.0
+
+### Minor Changes
+
+- [#84](https://github.com/driimus/lambda-batch-processor/pull/84) [`049d4c4`](https://github.com/driimus/lambda-batch-processor/commit/049d4c4ed1bd31c6ac50857ff6af56b764d3806b) Thanks [@driimus](https://github.com/driimus)! - refactor: remove unsupported `suppressErrors` option
+
+### Patch Changes
+
+- [#84](https://github.com/driimus/lambda-batch-processor/pull/84) [`be562a8`](https://github.com/driimus/lambda-batch-processor/commit/be562a8fce5a37d8e6f9acb466fb93a510c503e3) Thanks [@driimus](https://github.com/driimus)! - refactor: extract failure accumulator
+
 ## 0.1.5
 
 ### Patch Changes
