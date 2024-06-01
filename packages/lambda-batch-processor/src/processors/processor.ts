@@ -5,7 +5,12 @@ import {
   DefaultPermanentFailureHandler,
   type PermanentFailureHandler,
 } from '../permanentFailureHandler/index.js';
-import type { BatchEvent, BatchResponse, EntryType, RecordProcessor } from '../types/index.js';
+import type {
+  BatchEvent,
+  BatchResponse,
+  ProcessableRecord,
+  RecordProcessor,
+} from '../types/index.js';
 import { FailureAccumulator } from './failureAccumulator.js';
 
 interface LogFunction {
@@ -28,10 +33,7 @@ export type BatchProcessorOptions<TEvent extends BatchEvent> = {
   nonRetryableErrorHandler?: PermanentFailureHandler<TEvent>;
 };
 
-export abstract class BatchProcessor<
-  TEvent extends BatchEvent,
-  TRecord extends EntryType<TEvent['Records']> = EntryType<TEvent['Records']>,
-> {
+export abstract class BatchProcessor<TEvent extends BatchEvent> {
   protected nonRetryableErrors: BatchProcessorOptions<TEvent>['nonRetryableErrors'];
   protected nonRetryableErrorHandler: PermanentFailureHandler<TEvent>;
   protected logger: Logger | undefined;
@@ -49,7 +51,10 @@ export abstract class BatchProcessor<
     this.logger = logger;
   }
 
-  async process({ Records }: { Records: TRecord[] }, context?: Context): Promise<BatchResponse> {
+  async process(
+    { Records }: { Records: ProcessableRecord<TEvent>[] },
+    context?: Context,
+  ): Promise<BatchResponse> {
     const results = await Promise.allSettled(
       Records.map((record) => this.handler(record, context)),
     );
@@ -59,18 +64,7 @@ export abstract class BatchProcessor<
       this.nonRetryableErrors,
     ).addResults(Records, results);
 
-    await this.nonRetryableErrorHandler
-      .handleRejections(failureAccumulator.permanentFailures, context)
-      .catch((error) => {
-        this.logger?.error(error, 'Failed handling permanent failures');
-        /**
-         * TODO: the java powetools fail everything to re-process the entire batch
-         * in this case.
-         *
-         * Which approach is better?
-         */
-        failureAccumulator.surfacePermanentFailures();
-      });
+    await this.nonRetryableErrorHandler.handleRejections(failureAccumulator, context);
 
     if (failureAccumulator.batchItemFailures.length === 0) {
       this.logger?.info(`All ${Records.length} records successfully processed`);
@@ -87,5 +81,5 @@ export abstract class BatchProcessor<
     return failureAccumulator.toResponse();
   }
 
-  protected abstract getFailureIdentifier(this: void, record: TRecord): string;
+  protected abstract getFailureIdentifier(this: void, record: ProcessableRecord<TEvent>): string;
 }

@@ -1,15 +1,11 @@
-import { type PermanentFailure } from '../permanentFailureHandler/index.js';
-import type {
-  BatchEvent,
-  BatchItemFailures,
-  EntryType,
-  FailureIdProvider,
-} from '../types/index.js';
+import type { BatchItemFailures, FailureIdProvider, ProcessableRecord } from '../types/index.js';
 
-export class FailureAccumulator<
-  TEvent extends BatchEvent,
-  TRecord extends EntryType<TEvent['Records']> = EntryType<TEvent['Records']>,
-> {
+export type PermanentFailure<T extends ProcessableRecord = ProcessableRecord> = {
+  record: T;
+  reason: unknown;
+};
+
+export class FailureAccumulator<TRecord extends ProcessableRecord> {
   permanentFailures: PermanentFailure<TRecord>[] = [];
 
   batchItemFailures: BatchItemFailures = [];

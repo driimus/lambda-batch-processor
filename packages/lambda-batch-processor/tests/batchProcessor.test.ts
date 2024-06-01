@@ -5,7 +5,11 @@ import { sqsRecordFactory } from '@driimus/aws-event-factory';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 import { describe, expect, it, vi } from 'vitest';
 
-import { DefaultPermanentFailureHandler } from '../src/permanentFailureHandler/index.js';
+import type {
+  FailureAccumulator,
+  PermanentFailure,
+  PermanentFailureHandler,
+} from '../src/index.js';
 import { BatchProcessor } from '../src/processors/processor.js';
 
 describe('BatchProcessor', () => {
@@ -68,15 +72,27 @@ describe('BatchProcessor', () => {
     });
 
     it('surfaces failures with the non-retryable errors handler', async () => {
-      const nonRetryableErrorHandler = new DefaultPermanentFailureHandler();
-      const spy = vi.spyOn(nonRetryableErrorHandler, 'handleRejections');
+      const handlingFunction = vi.fn<[PermanentFailure<SQSRecord>]>(async () => {});
+      const nonRetryableErrorHandler = new (class Test
+        implements PermanentFailureHandler<SQSEvent>
+      {
+        async handleRejections(accumulator: FailureAccumulator<SQSRecord>) {
+          try {
+            for (const failure of accumulator.permanentFailures) {
+              await handlingFunction(failure);
+            }
+          } catch {
+            accumulator.surfacePermanentFailures();
+          }
+        }
+      })();
       const p = new TestProcessor(handler, {
         nonRetryableErrors: [ValidationError],
         nonRetryableErrorHandler,
         logger: new Console({ stdout: new Stream.PassThrough(), stderr: new Stream.PassThrough() }),
       });
 
-      spy.mockRejectedValueOnce(new Error('something went wrong'));
+      handlingFunction.mockRejectedValueOnce(new Error('something went wrong'));
       await expect(
         p.process({
           Records: [sqsRecordFactory.build(), sqsRecordFactory.build({ body: 'invalid body' })],

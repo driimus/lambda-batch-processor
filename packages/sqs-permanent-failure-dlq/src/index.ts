@@ -4,8 +4,16 @@ import type {
   SendMessageCommandInput,
 } from '@aws-sdk/client-sqs';
 import { SendMessageBatchCommand, SQSClient } from '@aws-sdk/client-sqs';
-import type { PermanentFailure, PermanentFailureHandler } from '@driimus/lambda-batch-processor';
+import type {
+  FailureAccumulator,
+  Logger,
+  PermanentFailure,
+  PermanentFailureHandler,
+} from '@driimus/lambda-batch-processor';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
+
+import type { ProcessableRecord } from '../../lambda-batch-processor/dist/types/index.js';
+import { map, take } from './iteratorHelpers.js';
 
 /**
  * SQS batch actions can only manipulate up to 10 messages.
@@ -15,13 +23,22 @@ import type { SQSEvent, SQSRecord } from 'aws-lambda';
 const MAX_BATCH_SIZE = 10;
 
 export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEvent> {
+  protected logger: Logger | undefined;
+
   #client: SQSClient | undefined;
 
   constructor(
     public readonly queueUrl: string,
-    client?: SQSClient,
+    {
+      client,
+      logger,
+    }: {
+      client?: SQSClient;
+      logger?: Logger;
+    } = {},
   ) {
     this.#client = client;
+    this.logger = logger;
   }
 
   protected get client() {
@@ -29,26 +46,50 @@ export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEv
     return this.#client;
   }
 
-  async handleRejections(failures: PermanentFailure<SQSRecord>[]): Promise<void> {
-    const messages: SendMessageBatchRequestEntry[] = failures.map(({ record }) => {
-      return {
-        Id: record.messageId,
-        MessageBody: record.body,
-        MessageAttributes: this.getMessageAttributes(record),
-      };
-    });
+  async handleRejections(
+    accumulator: FailureAccumulator<ProcessableRecord<SQSEvent>>,
+  ): Promise<void> {
+    const messageBatches = Failure.toMessageBatch(accumulator.permanentFailures[Symbol.iterator]());
 
-    for (let index = 0; index < messages.length; index += MAX_BATCH_SIZE) {
-      await this.client.send(
-        new SendMessageBatchCommand({
-          QueueUrl: this.queueUrl,
-          Entries: messages.slice(index, index + MAX_BATCH_SIZE),
-        }),
-      );
+    try {
+      for (const Entries of messageBatches) {
+        await this.client.send(
+          new SendMessageBatchCommand({
+            QueueUrl: this.queueUrl,
+            Entries,
+          }),
+        );
+      }
+    } catch (error) {
+      this.logger?.error(error, 'Failed handling permanent failures');
+      /**
+       * TODO: the java powertools fail everything to re-process the entire batch
+       * in this case.
+       *
+       * Which approach is better?
+       */
+      accumulator.surfacePermanentFailures();
     }
   }
+}
 
-  private getMessageAttributes({ messageAttributes }: SQSRecord) {
+const Failure = {
+  *toMessageBatch(iterator: IterableIterator<PermanentFailure<SQSRecord>>) {
+    let chunk: ReturnType<typeof Failure.toEntry>[];
+    while (true) {
+      chunk = [...map(take(iterator, MAX_BATCH_SIZE), Failure.toEntry)];
+      if (chunk.length === 0) return;
+      yield chunk;
+    }
+  },
+  toEntry(this: void, { record }: PermanentFailure<SQSRecord>): SendMessageBatchRequestEntry {
+    return {
+      Id: record.messageId,
+      MessageBody: record.body,
+      MessageAttributes: Failure.getMessageAttributes(record),
+    };
+  },
+  getMessageAttributes({ messageAttributes }: SQSRecord) {
     const attributes: SendMessageCommandInput['MessageAttributes'] = {};
 
     for (const [name, attribute] of Object.entries(messageAttributes)) {
@@ -63,5 +104,5 @@ export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEv
     }
 
     return attributes;
-  }
-}
+  },
+};

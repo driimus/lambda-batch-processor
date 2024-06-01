@@ -1,13 +1,18 @@
+import { Console } from 'node:console';
+import { Stream } from 'node:stream';
+
 import { SendMessageBatchCommand, SQSClient } from '@aws-sdk/client-sqs';
 import {
   sqsEventFactory,
   sqsMessageAttributeFactory,
   sqsRecordFactory,
 } from '@driimus/aws-event-factory';
-import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
+import { FailureAccumulator, SQSBatchProcessor } from '@driimus/lambda-batch-processor';
 import { faker } from '@faker-js/faker';
+import type { SQSRecord } from 'aws-lambda';
 import { mockClient } from 'aws-sdk-client-mock';
 import mockJestMatchers from 'aws-sdk-client-mock-jest';
+import { Factory } from 'fishery';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { PermanentFailureDLQHandler } from '../src/index.js';
@@ -20,11 +25,18 @@ beforeEach(() => {
   mockSQS.reset();
 });
 
+const accumulatorFactory = Factory.define<FailureAccumulator<SQSRecord>>(
+  () => new FailureAccumulator<SQSRecord>((record) => record.messageId),
+);
+
 describe('PermanentFailureDLQHandler', () => {
   const queueUrl = faker.internet.url();
-  const toDLQHandler = new PermanentFailureDLQHandler(queueUrl);
+  const toDLQHandler = new PermanentFailureDLQHandler(queueUrl, {
+    logger: new Console({ stdout: new Stream.PassThrough(), stderr: new Stream.PassThrough() }),
+  });
 
-  const failures = sqsRecordFactory
+  let failures: FailureAccumulator<SQSRecord>;
+  const permanentFailures = sqsRecordFactory
     .buildList(2, {
       messageAttributes: {
         attributeOne: sqsMessageAttributeFactory.string().build(),
@@ -37,6 +49,10 @@ describe('PermanentFailureDLQHandler', () => {
       return { record, reason: faker.lorem.sentence() };
     });
 
+  beforeEach(() => {
+    failures = accumulatorFactory.build({ permanentFailures });
+  });
+
   it('should send provided records to the configured queue', async () => {
     mockSQS.resolves({});
 
@@ -44,35 +60,42 @@ describe('PermanentFailureDLQHandler', () => {
     expect(mockSQS).toHaveReceivedCommandTimes(SendMessageBatchCommand, 1);
     expect(mockSQS).toHaveReceivedCommandWith(SendMessageBatchCommand, {
       QueueUrl: queueUrl,
-      Entries: expect.objectContaining({ length: failures.length }),
+      Entries: expect.objectContaining({ length: failures.permanentFailures.length }),
     });
   });
 
   it('should surface rejections', async () => {
     mockSQS.rejectsOnce({});
 
-    await expect(toDLQHandler.handleRejections(failures)).rejects.toThrow();
+    const surfacePermanentFailures = vi.spyOn(failures, 'surfacePermanentFailures');
+
+    await expect(toDLQHandler.handleRejections(failures)).resolves.toBeUndefined();
     expect(mockSQS).toHaveReceivedCommandTimes(SendMessageBatchCommand, 1);
+    expect(surfacePermanentFailures).toHaveBeenCalled();
   });
 
   it('should not publish for empty failure lists', async () => {
     mockSQS.rejectsOnce({});
 
-    await expect(toDLQHandler.handleRejections([])).resolves.toBeUndefined();
+    await expect(
+      toDLQHandler.handleRejections(accumulatorFactory.build({ permanentFailures: [] })),
+    ).resolves.toBeUndefined();
     expect(mockSQS).not.toHaveReceivedCommand(SendMessageBatchCommand);
   });
 
   it('should move messages in batches of 10', async () => {
     mockSQS.resolves({});
 
-    const failures = sqsRecordFactory.buildList(12).map((record) => {
+    const permanentFailures = sqsRecordFactory.buildList(12).map((record) => {
       return { record, reason: faker.lorem.sentence() };
     });
 
-    await expect(toDLQHandler.handleRejections(failures)).resolves.toBeUndefined();
+    await expect(
+      toDLQHandler.handleRejections(accumulatorFactory.build({ permanentFailures })),
+    ).resolves.toBeUndefined();
     expect(mockSQS).toHaveReceivedCommandTimes(
       SendMessageBatchCommand,
-      Math.ceil(failures.length / 10),
+      Math.ceil(permanentFailures.length / 10),
     );
   });
 
@@ -106,7 +129,14 @@ describe('PermanentFailureDLQHandler', () => {
     });
     expect(failureHandlerSpy).toHaveBeenCalledTimes(1);
     expect(failureHandlerSpy).toHaveBeenCalledWith(
-      [expect.objectContaining({ record: invalidRecord, reason: expect.any(ValidationError) })],
+      expect.objectContaining({
+        permanentFailures: [
+          expect.objectContaining({
+            record: invalidRecord,
+            reason: expect.any(ValidationError),
+          }),
+        ],
+      }),
       undefined,
     );
   });
