@@ -12,7 +12,7 @@ export default tsEslint.config(
   ...tsEslint.configs.recommendedTypeChecked,
   {
     rules: {
-      complexity: ['warn', { max: 6 }],
+      complexity: ['warn', { max: 5 }],
     },
   },
   {
