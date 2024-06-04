@@ -1,19 +1,29 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "pipeline": {
+  "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"],
-      "outputMode": "new-only"
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ],
+      "outputLogs": "new-only"
     },
     "test": {
-      "dependsOn": ["^build"],
-      "env": ["NODE_VERSION"],
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "NODE_VERSION"
+      ],
       "outputs": [],
-      "outputMode": "new-only"
+      "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": []
     },
     "format": {
