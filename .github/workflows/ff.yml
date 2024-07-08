@@ -1,0 +1,11 @@
+name: merge --ff-only
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fast-forward-merge:
+    uses: driimus/shared-workflows/.github/workflows/ff-merge.yml@main
