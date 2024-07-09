@@ -1,5 +1,11 @@
 # @driimus/lambda-batch-processor
 
+## 0.2.1
+
+### Patch Changes
+
+- [`2f21ba3`](https://github.com/driimus/lambda-batch-processor/commit/2f21ba3b698ffd512a898ff03f0cd24a9833024d) Thanks [@driimus](https://github.com/driimus)! - chore: temporary changeset to test signed publish
+
 ## 0.2.0
 
 ### Minor Changes
