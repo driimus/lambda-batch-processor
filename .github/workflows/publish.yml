@@ -11,6 +11,5 @@ permissions:
 
 jobs:
   packages:
-    uses: driimus/shared-workflows/.github/workflows/publish.yml@main
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    uses: driimus/shared-workflows/.github/workflows/publish.yml@19-sign-commits-in-publish-workflow
+    secrets: inherit
