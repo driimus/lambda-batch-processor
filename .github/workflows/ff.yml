@@ -8,4 +8,5 @@ permissions:
 
 jobs:
   fast-forward-merge:
-    uses: driimus/shared-workflows/.github/workflows/ff-merge.yml@main
+    uses: driimus/shared-workflows/.github/workflows/ff-merge.yml@feat/custom-merge-actor
+    secrets: inherit
