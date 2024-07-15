@@ -1,5 +1,11 @@
 # @driimus/lambda-batch-processor
 
+## 0.3.0
+
+### Minor Changes
+
+- [#91](https://github.com/driimus/lambda-batch-processor/pull/91) [`931879b`](https://github.com/driimus/lambda-batch-processor/commit/931879b6b5b681a026b620c8b8e8cd7600dc228a) Thanks [@driimus](https://github.com/driimus)! - refactor: iterator-based permanent failure handling
+
 ## 0.2.0
 
 ### Minor Changes
