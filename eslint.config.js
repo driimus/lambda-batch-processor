@@ -1,4 +1,5 @@
 import eslint from '@eslint/js';
+import importX from 'eslint-plugin-import-x';
 import prettier from 'eslint-plugin-prettier/recommended';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import turbo from 'eslint-plugin-turbo';
@@ -25,15 +26,15 @@ export default tsEslint.config(
   },
   {
     plugins: {
+      'import-x': importX,
       'simple-import-sort': simpleImportSort,
     },
     rules: {
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
-      // TODO: re-enable after flat config support
-      // 'import/first': 'error',
-      // 'import/newline-after-import': 'error',
-      // 'import/no-duplicates': 'error',
+      'import-x/first': 'error',
+      'import-x/newline-after-import': 'error',
+      'import-x/no-duplicates': 'error',
     },
   },
   unicorn.configs['flat/recommended'],
