@@ -17,7 +17,8 @@ export class FailureAccumulator<TRecord extends ProcessableRecord> {
 
   addResults(records: TRecord[], results: PromiseSettledResult<void>[]) {
     for (const [index, result] of results.entries()) {
-      if (result.status === 'rejected') this.addFailure(records[index], result.reason);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      if (result.status === 'rejected') this.addFailure(records[index]!, result.reason);
     }
 
     return this;

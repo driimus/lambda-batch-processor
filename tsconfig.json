@@ -1,15 +1,7 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": ["@tsconfig/node-lts/tsconfig.json", "@tsconfig/strictest/tsconfig.json"],
   "compilerOptions": {
-    "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "verbatimModuleSyntax": true,
-    "exactOptionalPropertyTypes": true
-  }
+    "verbatimModuleSyntax": true
+  },
+  "exclude": ["**/dist", "**/coverage", "**/node_modules", "*.js"]
 }
