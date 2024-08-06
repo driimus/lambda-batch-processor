@@ -30,5 +30,5 @@ export const createAuthChallengeEventFactory = Factory.define<CreateAuthChalleng
         challengeMetadata: '',
       },
     };
-  }
+  },
 );

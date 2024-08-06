@@ -21,7 +21,7 @@ export const customSMSSenderEventFactory = Factory.define<CustomSMSSenderTrigger
     },
     request: {
       type: 'customSMSSenderRequestV1',
-      code: faker.random.alphaNumeric(),
+      code: faker.string.alphanumeric(),
       userAttributes: userAttributeFactory.build({ sub: userName }),
     },
     response: {},

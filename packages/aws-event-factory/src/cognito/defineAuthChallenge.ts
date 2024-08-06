@@ -35,5 +35,5 @@ export const defineAuthChallengeEventFactory = Factory.define<DefineAuthChalleng
         issueTokens: false,
       },
     };
-  }
+  },
 );

@@ -19,8 +19,8 @@ export class CustomEmailSenderEventFactory extends Factory<CustomEmailSenderTrig
           // TODO: populate all fields?
           ACCOUNT_TAKE_OVER_ACTION: 'NO_ACTION',
           IP_ADDRESS: faker.internet.ipv4(),
-          CITY: faker.address.city(),
-          COUNTRY: faker.address.country(),
+          CITY: faker.location.city(),
+          COUNTRY: faker.location.country(),
         },
       },
     }) as Factory<CustomEmailSenderAccountTakeOverNotificationTriggerEvent>;
@@ -32,6 +32,7 @@ export const customEmailSenderEventFactory = CustomEmailSenderEventFactory.defin
 
   return {
     version: '1',
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     triggerSource: 'CustomEmailSender_ForgotPassword' as any,
     region: 'us-east-1',
     userPoolId: 'us-east-1_example',
@@ -42,7 +43,7 @@ export const customEmailSenderEventFactory = CustomEmailSenderEventFactory.defin
     },
     request: {
       type: 'customEmailSenderRequestV1',
-      code: faker.random.alphaNumeric(),
+      code: faker.string.alphanumeric(),
       userAttributes: userAttributeFactory.build({ sub: userName }),
     },
     response: {},
