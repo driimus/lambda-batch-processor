@@ -21,9 +21,6 @@
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": [
-        "^build"
-      ],
       "outputs": []
     },
     "format": {
