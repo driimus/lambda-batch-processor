@@ -35,6 +35,8 @@
   ],
   "scripts": {
     "build": "tsc",
+    "format": "eslint --fix",
+    "lint": "eslint",
     "test": "vitest run"
   },
   "peerDependencies": {
