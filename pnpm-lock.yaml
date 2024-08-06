@@ -24,8 +24,8 @@ importers:
         specifier: ^8.10.131
         version: 8.10.131
       '@types/node':
-        specifier: ^18.18.6
-        version: 18.19.33
+        specifier: ^20.0.0
+        version: 20.14.14
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.0.1
         version: 8.0.1(@typescript-eslint/parser@8.0.1(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3)
@@ -34,7 +34,7 @@ importers:
         version: 8.0.1(eslint@9.8.0)(typescript@5.3.3)
       '@vitest/coverage-v8':
         specifier: ^2.0.0
-        version: 2.0.1(vitest@2.0.1(@types/node@18.19.33))
+        version: 2.0.1(vitest@2.0.1(@types/node@20.14.14))
       eslint:
         specifier: ^9.8.0
         version: 9.8.0
@@ -58,7 +58,7 @@ importers:
         version: 55.0.0(eslint@9.8.0)
       eslint-plugin-vitest:
         specifier: ^0.5.4
-        version: 0.5.4(@typescript-eslint/eslint-plugin@8.0.1(@typescript-eslint/parser@8.0.1(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3)(vitest@2.0.1(@types/node@18.19.33))
+        version: 0.5.4(@typescript-eslint/eslint-plugin@8.0.1(@typescript-eslint/parser@8.0.1(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3)(vitest@2.0.1(@types/node@20.14.14))
       fishery:
         specifier: ^2.2.2
         version: 2.2.2
@@ -76,7 +76,7 @@ importers:
         version: 8.0.1(eslint@9.8.0)(typescript@5.3.3)
       vitest:
         specifier: ^2.0.0
-        version: 2.0.1(@types/node@18.19.33)
+        version: 2.0.1(@types/node@20.14.14)
 
   packages/aws-event-factory:
     dependencies:
@@ -846,8 +846,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@18.19.33':
-    resolution: {integrity: sha512-NR9+KrpSajr2qBVp/Yt5TU/rp+b5Mayi3+OlMlcg2cVCfRmcG5PWZ7S4+MG9PZ5gWBoc9Pd0BKSRViuBCRPu0A==}
+  '@types/node@20.14.14':
+    resolution: {integrity: sha512-d64f00982fS9YoOgJkAMolK7MN8Iq3TDdVjchbYHdEmjth/DHowx82GnoA+tVUAN+7vxfYUgAzi+JXbKNd2SDQ==}
 
   '@types/normalize-package-data@2.4.1':
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -3661,7 +3661,7 @@ snapshots:
       '@jest/schemas': 28.1.3
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.19.33
+      '@types/node': 20.14.14
       '@types/yargs': 17.0.17
       chalk: 4.1.2
 
@@ -3816,7 +3816,7 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@18.19.33':
+  '@types/node@20.14.14':
     dependencies:
       undici-types: 5.26.5
 
@@ -3957,7 +3957,7 @@ snapshots:
       '@typescript-eslint/types': 8.0.1
       eslint-visitor-keys: 3.4.3
 
-  '@vitest/coverage-v8@2.0.1(vitest@2.0.1(@types/node@18.19.33))':
+  '@vitest/coverage-v8@2.0.1(vitest@2.0.1(@types/node@20.14.14))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -3972,7 +3972,7 @@ snapshots:
       std-env: 3.7.0
       strip-literal: 2.1.0
       test-exclude: 7.0.1
-      vitest: 2.0.1(@types/node@18.19.33)
+      vitest: 2.0.1(@types/node@20.14.14)
     transitivePeerDependencies:
       - supports-color
 
@@ -4502,13 +4502,13 @@ snapshots:
       semver: 7.6.3
       strip-indent: 3.0.0
 
-  eslint-plugin-vitest@0.5.4(@typescript-eslint/eslint-plugin@8.0.1(@typescript-eslint/parser@8.0.1(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3)(vitest@2.0.1(@types/node@18.19.33)):
+  eslint-plugin-vitest@0.5.4(@typescript-eslint/eslint-plugin@8.0.1(@typescript-eslint/parser@8.0.1(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3)(vitest@2.0.1(@types/node@20.14.14)):
     dependencies:
       '@typescript-eslint/utils': 7.18.0(eslint@9.8.0)(typescript@5.3.3)
       eslint: 9.8.0
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 8.0.1(@typescript-eslint/parser@8.0.1(eslint@9.8.0)(typescript@5.3.3))(eslint@9.8.0)(typescript@5.3.3)
-      vitest: 2.0.1(@types/node@18.19.33)
+      vitest: 2.0.1(@types/node@20.14.14)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -4982,7 +4982,7 @@ snapshots:
   jest-util@28.1.3:
     dependencies:
       '@jest/types': 28.1.3
-      '@types/node': 18.19.33
+      '@types/node': 20.14.14
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -5763,13 +5763,13 @@ snapshots:
       spdx-correct: 3.1.1
       spdx-expression-parse: 3.0.1
 
-  vite-node@2.0.1(@types/node@18.19.33):
+  vite-node@2.0.1(@types/node@20.14.14):
     dependencies:
       cac: 6.7.14
       debug: 4.3.5
       pathe: 1.1.2
       picocolors: 1.0.1
-      vite: 5.2.11(@types/node@18.19.33)
+      vite: 5.2.11(@types/node@20.14.14)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -5780,16 +5780,16 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.2.11(@types/node@18.19.33):
+  vite@5.2.11(@types/node@20.14.14):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.17.2
     optionalDependencies:
-      '@types/node': 18.19.33
+      '@types/node': 20.14.14
       fsevents: 2.3.3
 
-  vitest@2.0.1(@types/node@18.19.33):
+  vitest@2.0.1(@types/node@20.14.14):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@vitest/expect': 2.0.1
@@ -5806,11 +5806,11 @@ snapshots:
       std-env: 3.7.0
       tinybench: 2.8.0
       tinypool: 1.0.0
-      vite: 5.2.11(@types/node@18.19.33)
-      vite-node: 2.0.1(@types/node@18.19.33)
+      vite: 5.2.11(@types/node@20.14.14)
+      vite-node: 2.0.1(@types/node@20.14.14)
       why-is-node-running: 2.2.2
     optionalDependencies:
-      '@types/node': 18.19.33
+      '@types/node': 20.14.14
     transitivePeerDependencies:
       - less
       - lightningcss
