@@ -1,5 +1,11 @@
 # @driimus/aws-event-factory
 
+## 0.2.2
+
+### Patch Changes
+
+- [#97](https://github.com/driimus/lambda-batch-processor/pull/97) [`626091c`](https://github.com/driimus/lambda-batch-processor/commit/626091ce94b3e1a5004859dedc2696e163837dd1) Thanks [@driimus](https://github.com/driimus)! - refactor: replace faker deprecations
+
 ## 0.2.1
 
 ### Patch Changes
