@@ -15,8 +15,13 @@
   },
   "publishConfig": {
     "provenance": true,
-    "exports": "./dist/index.js",
-    "types": "./dist/index.d.ts"
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "types":"./dist/index.d.ts"
+      },
+      "./*": "./dist/*"
+    }
   },
   "repository": {
     "type": "git",
@@ -29,7 +34,10 @@
     "email": "driimus@vivaldi.net"
   },
   "type": "module",
-  "exports": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  },
   "files": [
     "./dist"
   ],
@@ -51,6 +59,6 @@
     }
   },
   "engines": {
-    "node": ">=16.15.0"
+    "node": ">=18"
   }
 }

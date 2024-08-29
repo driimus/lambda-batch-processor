@@ -10,9 +10,9 @@ import type {
   PermanentFailure,
   PermanentFailureHandler,
 } from '@driimus/lambda-batch-processor';
+import type { ProcessableRecord } from '@driimus/lambda-batch-processor/types/index.js';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 
-import type { ProcessableRecord } from '../../lambda-batch-processor/dist/types/index.js';
 import { map, take } from './iteratorHelpers.js';
 
 /**
