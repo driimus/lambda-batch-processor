@@ -1,5 +1,11 @@
 # @driimus/lambda-batch-processor
 
+## 0.3.1
+
+### Patch Changes
+
+- [#100](https://github.com/driimus/lambda-batch-processor/pull/100) [`bc1a23d`](https://github.com/driimus/lambda-batch-processor/commit/bc1a23d756cde2df6eee625d145fe6e9037630bf) Thanks [@driimus](https://github.com/driimus)! - fix(types): expose shared types through import maps
+
 ## 0.3.0
 
 ### Minor Changes
