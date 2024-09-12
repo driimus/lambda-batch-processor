@@ -24,7 +24,10 @@ pnpm add --save-dev @types/aws-lambda
 
 ## Usage
 
-> [!WARNING] > [`ReportBatchItemFailures`](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-batchfailurereporting) must be enabled to allow retrying failed messages.
+<!-- prettier-ignore-start -->
+> [!WARNING]
+> [`ReportBatchItemFailures`](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-batchfailurereporting) must be enabled to allow retrying failed messages.
+<!-- prettier-ignore-end -->
 
 ```ts
 import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
