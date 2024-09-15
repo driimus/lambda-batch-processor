@@ -1,14 +1,14 @@
 import eslint from '@eslint/js';
+import vitest from '@vitest/eslint-plugin';
 import importX from 'eslint-plugin-import-x';
 import prettier from 'eslint-plugin-prettier/recommended';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import turbo from 'eslint-plugin-turbo';
 import unicorn from 'eslint-plugin-unicorn';
-import vitest from 'eslint-plugin-vitest';
 import tsEslint from 'typescript-eslint';
 
 export default tsEslint.config(
-  { ignores: ['packages/*/dist', 'packages/*/coverage', '**/*.d.ts', 'eslint.config.js'] },
+  { ignores: ['packages/*/dist', 'packages/*/coverage', '**/*.d.ts'] },
   eslint.configs.recommended,
   ...tsEslint.configs.recommendedTypeChecked,
   {
@@ -19,7 +19,9 @@ export default tsEslint.config(
   {
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        projectService: {
+          allowDefaultProject: ['eslint.config.js'],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -90,6 +92,7 @@ export default tsEslint.config(
   {
     files: ['turbo.json'],
     plugins: {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       turbo,
     },
     rules: {
