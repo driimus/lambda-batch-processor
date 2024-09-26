@@ -48,30 +48,24 @@ export default tsEslint.config(
     rules: {
       'prefer-const': ['error', { destructuring: 'all' }],
       'unicorn/filename-case': ['warn', { case: 'camelCase' }],
-      'unicorn/prevent-abbreviations': 'warn',
       'unicorn/no-null': 'off',
       'unicorn/no-useless-switch-case': 'error',
+      'unicorn/prevent-abbreviations': 'warn',
+      '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/member-ordering': 'warn',
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-use-before-define': 'off',
-      '@typescript-eslint/no-non-null-asserted-nullish-coalescing': 'error',
-      '@typescript-eslint/no-non-null-assertion': 'warn',
-      '@typescript-eslint/no-unsafe-return': 'warn',
-      '@typescript-eslint/no-unsafe-call': 'error',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
-      '@typescript-eslint/ban-types': 'off',
-      '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/no-misused-promises': [
         'error',
         {
           checksConditionals: true,
         },
       ],
+      '@typescript-eslint/no-non-null-asserted-nullish-coalescing': 'error',
+      '@typescript-eslint/no-non-null-assertion': 'warn',
       '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+      '@typescript-eslint/no-unsafe-return': 'warn',
+      '@typescript-eslint/no-unsafe-call': 'error',
       '@typescript-eslint/require-await': 'warn',
-      '@typescript-eslint/no-empty-interface': 'off',
-      '@typescript-eslint/consistent-type-imports': 'error',
     },
   },
   {
@@ -84,9 +78,7 @@ export default tsEslint.config(
       '@typescript-eslint/no-unsafe-assignment': 'off',
     },
     languageOptions: {
-      globals: {
-        ...vitest.environments.env.globals,
-      },
+      globals: vitest.environments.env.globals,
     },
   },
   {
@@ -96,6 +88,7 @@ export default tsEslint.config(
       turbo,
     },
     rules: {
+      ...tsEslint.configs.disableTypeChecked,
       'turbo/no-undeclared-env-vars': 'error',
     },
   },
