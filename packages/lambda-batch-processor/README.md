@@ -75,32 +75,3 @@ which is modelled after [pino](https://github.com/pinojs/pino)'s function signat
 
 > [!NOTE]
 > The provided logger should support serialising [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) objects.
-
-If using pino, it might be worth adding [pino-lambda](https://github.com/formidablelabs/pino-lambda),
-to preserve Lambda's standard log message format.
-
-```ts
-import { SQSBatchProcessor } from '@driimus/lambda-batch-processor';
-import pino from 'pino';
-import { lambdaRequestTracker, pinoLambdaDestination } from 'pino-lambda';
-
-const destination = pinoLambdaDestination();
-const withRequest = lambdaRequestTracker();
-
-const logger = pino({}, destination);
-
-const processor = new SQSBatchProcessor(
-  async (record) => {
-    /** do stuff */
-  },
-  {
-    logger,
-  },
-);
-
-export const handler = async (event, context) => {
-  withRequest(event, context);
-
-  return await processor.process(event, context);
-};
-```
