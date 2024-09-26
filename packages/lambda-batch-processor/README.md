@@ -19,7 +19,6 @@ For types to work as expected, `@types/aws-lambda` must be installed:
 
 ```sh
 pnpm add --save-dev @types/aws-lambda
-
 ```
 
 ## Usage
@@ -70,8 +69,13 @@ To send SQS messages to a dead-letter queue, you can use [`@driimus/sqs-permanen
 
 ### Logging
 
-You can enable logging by providing a logger compatible with the `Logger` interface,
+Logging can be enabled by providing a logger compatible with the `Logger` interface,
 which is modelled after [pino](https://github.com/pinojs/pino)'s function signatures.
 
 > [!NOTE]
 > The provided logger should support serialising [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) objects.
+
+## Alternatives
+
+Don't need special handling for [non-retryable errors](#non-retryable-errors)?
+Make sure to check out the implementation in [AWS Lambda Powertools for Typescript](https://github.com/aws-powertools/powertools-lambda-typescript/tree/main/packages/batch#readme), which has added ESM support in v2.
