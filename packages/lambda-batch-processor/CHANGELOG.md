@@ -1,5 +1,11 @@
 # @driimus/lambda-batch-processor
 
+## 0.3.2
+
+### Patch Changes
+
+- [#104](https://github.com/driimus/lambda-batch-processor/pull/104) [`d52ee29`](https://github.com/driimus/lambda-batch-processor/commit/d52ee29942706f0e3ef32b49bd87f21c74da3240) Thanks [@driimus](https://github.com/driimus)! - docs: reference alternative implementations
+
 ## 0.3.1
 
 ### Patch Changes
