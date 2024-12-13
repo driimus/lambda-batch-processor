@@ -41,7 +41,7 @@
   },
   "peerDependencies": {
     "@faker-js/faker": "^9.0.1",
-    "@types/aws-lambda": "^8.10.131",
+    "@types/aws-lambda": "^8.10.146",
     "fishery": "^2.2.2"
   },
   "peerDependenciesMeta": {
