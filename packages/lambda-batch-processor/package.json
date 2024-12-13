@@ -51,7 +51,7 @@
     "@driimus/aws-event-factory": "workspace:*"
   },
   "peerDependencies": {
-    "@types/aws-lambda": "^8.10.131"
+    "@types/aws-lambda": "^8.10.146"
   },
   "peerDependenciesMeta": {
     "@types/aws-lambda": {

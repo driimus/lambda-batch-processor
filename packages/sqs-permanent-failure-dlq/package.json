@@ -39,15 +39,14 @@
     "test": "vitest run --coverage.thresholds.100"
   },
   "devDependencies": {
-    "@aws-sdk/client-sqs": "^3.226.0",
+    "@aws-sdk/client-sqs": "^3.709.0",
     "@driimus/aws-event-factory": "workspace:*",
     "@driimus/lambda-batch-processor": "workspace:*",
-    "aws-sdk-client-mock": "^3.0.0",
-    "aws-sdk-client-mock-jest": "^3.0.0"
+    "aws-sdk-client-mock": "^4.1.0"
   },
   "peerDependencies": {
-    "@aws-sdk/client-sqs": "^3.226.0",
-    "@types/aws-lambda": "^8.10.131"
+    "@aws-sdk/client-sqs": "^3.709.0",
+    "@types/aws-lambda": "^8.10.146"
   },
   "peerDependenciesMeta": {
     "@types/aws-lambda": {

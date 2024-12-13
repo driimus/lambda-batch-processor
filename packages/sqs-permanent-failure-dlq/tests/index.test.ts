@@ -11,13 +11,10 @@ import { FailureAccumulator, SQSBatchProcessor } from '@driimus/lambda-batch-pro
 import { faker } from '@faker-js/faker';
 import type { SQSRecord } from 'aws-lambda';
 import { mockClient } from 'aws-sdk-client-mock';
-import mockJestMatchers from 'aws-sdk-client-mock-jest';
 import { Factory } from 'fishery';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { PermanentFailureDLQHandler } from '../src/index.js';
-
-expect.extend(mockJestMatchers);
 
 const mockSQS = mockClient(SQSClient);
 
@@ -57,11 +54,15 @@ describe('PermanentFailureDLQHandler', () => {
     mockSQS.resolves({});
 
     await expect(toDLQHandler.handleRejections(failures)).resolves.toBeUndefined();
-    expect(mockSQS).toHaveReceivedCommandTimes(SendMessageBatchCommand, 1);
-    expect(mockSQS).toHaveReceivedCommandWith(SendMessageBatchCommand, {
-      QueueUrl: queueUrl,
-      Entries: expect.objectContaining({ length: failures.permanentFailures.length }),
-    });
+    expect(mockSQS.commandCalls(SendMessageBatchCommand)).toHaveLength(1);
+    expect(mockSQS.commandCalls(SendMessageBatchCommand).at(0)?.args).toMatchObject([
+      {
+        input: {
+          QueueUrl: queueUrl,
+          Entries: expect.objectContaining({ length: failures.permanentFailures.length }),
+        },
+      },
+    ]);
   });
 
   it('should surface rejections', async () => {
@@ -70,7 +71,7 @@ describe('PermanentFailureDLQHandler', () => {
     const surfacePermanentFailures = vi.spyOn(failures, 'surfacePermanentFailures');
 
     await expect(toDLQHandler.handleRejections(failures)).resolves.toBeUndefined();
-    expect(mockSQS).toHaveReceivedCommandTimes(SendMessageBatchCommand, 1);
+    expect(mockSQS.commandCalls(SendMessageBatchCommand)).toHaveLength(1);
     expect(surfacePermanentFailures).toHaveBeenCalled();
   });
 
@@ -80,7 +81,7 @@ describe('PermanentFailureDLQHandler', () => {
     await expect(
       toDLQHandler.handleRejections(accumulatorFactory.build({ permanentFailures: [] })),
     ).resolves.toBeUndefined();
-    expect(mockSQS).not.toHaveReceivedCommand(SendMessageBatchCommand);
+    expect(mockSQS.commandCalls(SendMessageBatchCommand)).toHaveLength(0);
   });
 
   it('should move messages in batches of 10', async () => {
@@ -93,8 +94,7 @@ describe('PermanentFailureDLQHandler', () => {
     await expect(
       toDLQHandler.handleRejections(accumulatorFactory.build({ permanentFailures })),
     ).resolves.toBeUndefined();
-    expect(mockSQS).toHaveReceivedCommandTimes(
-      SendMessageBatchCommand,
+    expect(mockSQS.commandCalls(SendMessageBatchCommand)).toHaveLength(
       Math.ceil(permanentFailures.length / 10),
     );
   });
