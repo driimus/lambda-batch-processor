@@ -49,6 +49,7 @@ export default tsEslint.config(
       'prefer-const': ['error', { destructuring: 'all' }],
       'unicorn/filename-case': ['warn', { case: 'camelCase' }],
       'unicorn/no-null': 'off',
+      'unicorn/no-array-callback-reference': 'off',
       'unicorn/no-useless-switch-case': 'error',
       'unicorn/prevent-abbreviations': 'warn',
       '@typescript-eslint/consistent-type-imports': 'error',

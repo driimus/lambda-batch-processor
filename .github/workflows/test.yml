@@ -4,12 +4,7 @@ on:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        node-version: [18, 20, 22]
     uses: driimus/shared-workflows/.github/workflows/test.yml@main
-    with:
-      node-version: ${{ matrix.node-version }}
     secrets:
       turbo_token: ${{ secrets.TURBO_TOKEN }}
       turbo_team: ${{ secrets.TURBO_TEAM }}

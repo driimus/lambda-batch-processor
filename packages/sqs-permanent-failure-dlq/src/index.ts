@@ -13,8 +13,6 @@ import type {
 import type { ProcessableRecord } from '@driimus/lambda-batch-processor/types/index.js';
 import type { SQSEvent, SQSRecord } from 'aws-lambda';
 
-import { map, take } from './iteratorHelpers.js';
-
 /**
  * SQS batch actions can only manipulate up to 10 messages.
  *
@@ -74,10 +72,10 @@ export class PermanentFailureDLQHandler implements PermanentFailureHandler<SQSEv
 }
 
 const Failure = {
-  *toMessageBatch(iterator: IterableIterator<PermanentFailure<SQSRecord>>) {
+  *toMessageBatch(iterator: IteratorObject<PermanentFailure<SQSRecord>>) {
     let chunk: ReturnType<typeof Failure.toEntry>[];
     while (true) {
-      chunk = [...map(take(iterator, MAX_BATCH_SIZE), Failure.toEntry)];
+      chunk = iterator.take(MAX_BATCH_SIZE).map(Failure.toEntry).toArray();
       if (chunk.length === 0) return;
       yield chunk;
     }

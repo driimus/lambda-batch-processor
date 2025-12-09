@@ -21,8 +21,8 @@
     "@changesets/cli": "^2.27.1",
     "@eslint/js": "^9.22.0",
     "@faker-js/faker": "^9.6.0",
-    "@tsconfig/node-lts": "^22.0.1",
-    "@tsconfig/strictest": "^2.0.5",
+    "@tsconfig/node-lts": "^24.0.0",
+    "@tsconfig/strictest": "^2.0.8",
     "@types/aws-lambda": "^8.10.146",
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
@@ -39,12 +39,12 @@
     "fishery": "^2.2.2",
     "prettier": "^3.2.4",
     "turbo": "^2.0.1",
-    "typescript": "^5.7.3",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.23.0",
     "vitest": "^3.0.0"
   },
-  "packageManager": "pnpm@10.6.4+sha256.0a3574244b6d2bea5b5d530c0901fbc5dafa593c2e9962a421d57b839f97063f",
+  "packageManager": "pnpm@10.25.0+sha256.0f3726654b0b5e52e5800904de168afc3c667e2abf84bdb06d9ac1386104bd90",
   "engines": {
-    "node": ">=18.18.2"
+    "node": ">=24.11.0"
   }
 }
