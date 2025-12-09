@@ -30,8 +30,8 @@ importers:
         specifier: ^8.10.146
         version: 8.10.147
       '@types/node':
-        specifier: ^22.10.2
-        version: 22.13.1
+        specifier: ^24.0.0
+        version: 24.10.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.23.0
         version: 8.23.0(@typescript-eslint/parser@8.23.0(eslint@9.19.0)(typescript@5.9.3))(eslint@9.19.0)(typescript@5.9.3)
@@ -40,10 +40,10 @@ importers:
         version: 8.23.0(eslint@9.19.0)(typescript@5.9.3)
       '@vitest/coverage-v8':
         specifier: ^3.0.0
-        version: 3.0.5(vitest@3.0.5(@types/node@22.13.1))
+        version: 3.0.5(vitest@3.0.5(@types/node@24.10.2))
       '@vitest/eslint-plugin':
         specifier: ^1.1.16
-        version: 1.1.25(@typescript-eslint/utils@8.23.0(eslint@9.19.0)(typescript@5.9.3))(eslint@9.19.0)(typescript@5.9.3)(vitest@3.0.5(@types/node@22.13.1))
+        version: 1.1.25(@typescript-eslint/utils@8.23.0(eslint@9.19.0)(typescript@5.9.3))(eslint@9.19.0)(typescript@5.9.3)(vitest@3.0.5(@types/node@24.10.2))
       eslint:
         specifier: ^9.19.0
         version: 9.19.0
@@ -82,7 +82,7 @@ importers:
         version: 8.23.0(eslint@9.19.0)(typescript@5.9.3)
       vitest:
         specifier: ^3.0.0
-        version: 3.0.5(@types/node@22.13.1)
+        version: 3.0.5(@types/node@24.10.2)
 
   packages/aws-event-factory:
     dependencies:
@@ -890,8 +890,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@22.13.1':
-    resolution: {integrity: sha512-jK8uzQlrvXqEU91UxiK5J7pKHyzgnI1Qnl0QDHIgVGuolJhRb9EEl28Cj9b3rGR8B2lhFCtvIm5os8lFnO/1Ew==}
+  '@types/node@24.10.2':
+    resolution: {integrity: sha512-WOhQTZ4G8xZ1tjJTvKOpyEVSGgOTvJAfDK3FNFgELyaTpzhdgHVHeqW8V+UJvzF5BT+/B54T/1S2K6gd9c7bbA==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2065,8 +2065,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  undici-types@6.20.0:
-    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
+  undici-types@7.16.0:
+    resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
   unicorn-magic@0.1.0:
     resolution: {integrity: sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==}
@@ -3283,9 +3283,9 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@22.13.1':
+  '@types/node@24.10.2':
     dependencies:
-      undici-types: 6.20.0
+      undici-types: 7.16.0
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -3372,7 +3372,7 @@ snapshots:
       '@typescript-eslint/types': 8.23.0
       eslint-visitor-keys: 4.2.0
 
-  '@vitest/coverage-v8@3.0.5(vitest@3.0.5(@types/node@22.13.1))':
+  '@vitest/coverage-v8@3.0.5(vitest@3.0.5(@types/node@24.10.2))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
@@ -3386,17 +3386,17 @@ snapshots:
       std-env: 3.8.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.0.5(@types/node@22.13.1)
+      vitest: 3.0.5(@types/node@24.10.2)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/eslint-plugin@1.1.25(@typescript-eslint/utils@8.23.0(eslint@9.19.0)(typescript@5.9.3))(eslint@9.19.0)(typescript@5.9.3)(vitest@3.0.5(@types/node@22.13.1))':
+  '@vitest/eslint-plugin@1.1.25(@typescript-eslint/utils@8.23.0(eslint@9.19.0)(typescript@5.9.3))(eslint@9.19.0)(typescript@5.9.3)(vitest@3.0.5(@types/node@24.10.2))':
     dependencies:
       '@typescript-eslint/utils': 8.23.0(eslint@9.19.0)(typescript@5.9.3)
       eslint: 9.19.0
     optionalDependencies:
       typescript: 5.9.3
-      vitest: 3.0.5(@types/node@22.13.1)
+      vitest: 3.0.5(@types/node@24.10.2)
 
   '@vitest/expect@3.0.5':
     dependencies:
@@ -3405,13 +3405,13 @@ snapshots:
       chai: 5.1.2
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.0.5(vite@5.4.11(@types/node@22.13.1))':
+  '@vitest/mocker@3.0.5(vite@5.4.11(@types/node@24.10.2))':
     dependencies:
       '@vitest/spy': 3.0.5
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      vite: 5.4.11(@types/node@22.13.1)
+      vite: 5.4.11(@types/node@24.10.2)
 
   '@vitest/pretty-format@3.0.5':
     dependencies:
@@ -4459,7 +4459,7 @@ snapshots:
 
   typescript@5.9.3: {}
 
-  undici-types@6.20.0: {}
+  undici-types@7.16.0: {}
 
   unicorn-magic@0.1.0: {}
 
@@ -4482,13 +4482,13 @@ snapshots:
       spdx-correct: 3.1.1
       spdx-expression-parse: 3.0.1
 
-  vite-node@3.0.5(@types/node@22.13.1):
+  vite-node@3.0.5(@types/node@24.10.2):
     dependencies:
       cac: 6.7.14
       debug: 4.4.0
       es-module-lexer: 1.6.0
       pathe: 2.0.2
-      vite: 5.4.11(@types/node@22.13.1)
+      vite: 5.4.11(@types/node@24.10.2)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -4500,19 +4500,19 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.4.11(@types/node@22.13.1):
+  vite@5.4.11(@types/node@24.10.2):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.49
       rollup: 4.28.1
     optionalDependencies:
-      '@types/node': 22.13.1
+      '@types/node': 24.10.2
       fsevents: 2.3.3
 
-  vitest@3.0.5(@types/node@22.13.1):
+  vitest@3.0.5(@types/node@24.10.2):
     dependencies:
       '@vitest/expect': 3.0.5
-      '@vitest/mocker': 3.0.5(vite@5.4.11(@types/node@22.13.1))
+      '@vitest/mocker': 3.0.5(vite@5.4.11(@types/node@24.10.2))
       '@vitest/pretty-format': 3.0.5
       '@vitest/runner': 3.0.5
       '@vitest/snapshot': 3.0.5
@@ -4528,11 +4528,11 @@ snapshots:
       tinyexec: 0.3.2
       tinypool: 1.0.2
       tinyrainbow: 2.0.0
-      vite: 5.4.11(@types/node@22.13.1)
-      vite-node: 3.0.5(@types/node@22.13.1)
+      vite: 5.4.11(@types/node@24.10.2)
+      vite-node: 3.0.5(@types/node@24.10.2)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 22.13.1
+      '@types/node': 24.10.2
     transitivePeerDependencies:
       - less
       - lightningcss
