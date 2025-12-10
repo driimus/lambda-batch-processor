@@ -1,5 +1,11 @@
 # @driimus/sqs-permanent-failure-dlq
 
+## 0.3.0
+
+### Minor Changes
+
+- [#122](https://github.com/driimus/lambda-batch-processor/pull/122) [`308aece`](https://github.com/driimus/lambda-batch-processor/commit/308aece554d08c0267ac6fc7da746da32f4cdcd1) Thanks [@driimus](https://github.com/driimus)! - refactor: use native iterator helpers
+
 ## 0.2.1
 
 ### Patch Changes
