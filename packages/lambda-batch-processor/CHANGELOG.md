@@ -1,5 +1,11 @@
 # @driimus/lambda-batch-processor
 
+## 0.4.0
+
+### Minor Changes
+
+- [`eaa3ee5`](https://github.com/driimus/lambda-batch-processor/commit/eaa3ee543cec81c39a17afc7fdea44dfd554a223) Thanks [@renovate[bot]](https://github.com/renovate%5Bbot%5D)! - feat!: require node 24+
+
 ## 0.3.2
 
 ### Patch Changes
