@@ -27,7 +27,7 @@
     "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
-    "@vitest/coverage-v8": "^3.0.0",
+    "@vitest/coverage-v8": "^4.0.0",
     "@vitest/eslint-plugin": "^1.1.16",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
@@ -41,7 +41,7 @@
     "turbo": "^2.0.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.23.0",
-    "vitest": "^3.0.0"
+    "vitest": "^4.0.0"
   },
   "packageManager": "pnpm@10.25.0+sha256.0f3726654b0b5e52e5800904de168afc3c667e2abf84bdb06d9ac1386104bd90",
   "engines": {
