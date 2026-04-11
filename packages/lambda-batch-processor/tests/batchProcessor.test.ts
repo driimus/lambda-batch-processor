@@ -72,20 +72,19 @@ describe('BatchProcessor', () => {
     });
 
     it('surfaces failures with the non-retryable errors handler', async () => {
-      const handlingFunction = vi.fn<[PermanentFailure<SQSRecord>]>(async () => {});
-      const nonRetryableErrorHandler = new (class Test
-        implements PermanentFailureHandler<SQSEvent>
-      {
-        async handleRejections(accumulator: FailureAccumulator<SQSRecord>) {
-          try {
-            for (const failure of accumulator.permanentFailures) {
-              await handlingFunction(failure);
+      const handlingFunction = vi.fn<(failure: PermanentFailure) => Promise<void>>(async () => {});
+      const nonRetryableErrorHandler =
+        new (class Test implements PermanentFailureHandler<SQSEvent> {
+          async handleRejections(accumulator: FailureAccumulator<SQSRecord>) {
+            try {
+              for (const failure of accumulator.permanentFailures) {
+                await handlingFunction(failure);
+              }
+            } catch {
+              accumulator.surfacePermanentFailures();
             }
-          } catch {
-            accumulator.surfacePermanentFailures();
           }
-        }
-      })();
+        })();
       const p = new TestProcessor(handler, {
         nonRetryableErrors: [ValidationError],
         nonRetryableErrorHandler,
