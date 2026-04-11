@@ -3,7 +3,7 @@
   "extends": ["config:base", ":preserveSemverRanges"],
   "packageRules": [
     {
-      "matchPackagePatterns": ["^@aws-sdk/", "^aws-sdk-client-mock"],
+      "matchPackagePatterns": ["^@aws-sdk/", "^aws-sdk-client-mock", "@types/aws-lambda"],
       "groupName": "aws-sdk"
     },
     {
@@ -12,7 +12,13 @@
     },
     {
       "matchPackageNames": ["eslint", "prettier", "lint-staged"],
-      "matchPackagePatterns": ["^eslint-plugin", "^eslint-config", "^@typescript-eslint/"],
+      "matchPackagePatterns": [
+        "^eslint-plugin",
+        "^eslint-config",
+        "^@typescript-eslint/",
+        "^@eslint/",
+        "typescript-eslint"
+      ],
       "groupName": "linter"
     }
   ]
