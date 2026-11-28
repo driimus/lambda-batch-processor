@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.2",
-    "@changesets/cli": "^2.30.0",
+    "@changesets/cli": "^3.0.0",
     "@eslint/js": "^10.0.0",
     "@faker-js/faker": "^9.9.0",
     "@tsconfig/node-lts": "^24.0.0",
